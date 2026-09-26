@@ -947,7 +947,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
-function switchDashboardTab(tabName) {
+function switchDashboardTab(tabName, shouldScroll = true) {
     const tabs = ['bookmarks', 'ratings', 'fandoms', 'feedback'];
     tabs.forEach(t => {
         const btn = document.getElementById(`tab-btn-${t}`);
@@ -972,9 +972,13 @@ function switchDashboardTab(tabName) {
         history.replaceState(null, null, `#${tabName}`);
     } catch (e) {}
 
-    const container = document.getElementById('dashboardMainTabs');
-    if (container && window.scrollY > container.offsetTop - 80) {
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (shouldScroll) {
+        const target = (tabName === 'feedback')
+            ? (document.getElementById('dashFeedbackInlineForm') || document.getElementById('dashboardMainTabs'))
+            : document.getElementById('dashboardMainTabs');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 }
 
@@ -1049,9 +1053,13 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (window.location.hash === '#fandoms') {
         switchDashboardTab('fandoms');
     } else if (window.location.hash === '#feedback' || window.location.hash === '#error' || window.location.hash === '#suggestions') {
-        switchDashboardTab('feedback');
+        switchDashboardTab('feedback', true);
         if (window.location.hash === '#error') setFeedbackType('bug');
         if (window.location.hash === '#suggestions') setFeedbackType('suggestion');
+        setTimeout(() => {
+            const formBox = document.getElementById('dashFeedbackInlineForm');
+            if (formBox) formBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 120);
     } else if (window.location.hash === '#bookmarks') {
         switchDashboardTab('bookmarks');
     }

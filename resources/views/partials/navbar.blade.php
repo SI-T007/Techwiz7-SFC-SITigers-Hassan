@@ -141,10 +141,14 @@
                                 <i class="bi bi-chat-heart-fill text-danger me-2"></i> Fan Community
                             </a>
                         </li>
-                        <li><hr class="dropdown-divider border-subtle"></li>
                         <li>
                             <a class="dropdown-item py-2" href="{{ route('chatbot.index') }}">
                                 <i class="bi bi-robot text-purple me-2"></i> AI Fan Assistant
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ route('feedback.create') }}">
+                                <i class="bi bi-chat-left-dots-fill text-danger me-2"></i> Feedback & Bug Reports
                             </a>
                         </li>
                     </ul>
@@ -275,8 +279,8 @@
            href="{{ route('community.submit') }}">
             <i class="bi bi-plus-circle text-success"></i> Submit Fan Work
         </a>
-        <a class="fh-sidebar-link" href="{{ route('user.dashboard') }}#feedback">
-            <i class="bi bi-chat-left-heart-fill text-danger"></i> Give Feedback / Bugs
+        <a class="fh-sidebar-link {{ request()->routeIs('feedback.*') ? 'active' : '' }}" href="{{ route('feedback.create') }}">
+            <i class="bi bi-chat-left-heart-fill text-danger"></i> Send Feedback / Report Bug
         </a>
     </div>
 

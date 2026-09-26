@@ -15,13 +15,23 @@ class FeedbackController extends Controller
     /**
      * Show the platform feedback form.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
         $breadcrumbs = [
-            ['label' => 'Feedback', 'url' => ''],
+            ['label' => 'Feedback & Bug Reports', 'url' => ''],
         ];
 
-        return view('pages.feedback', compact('breadcrumbs'));
+        $initialType = $request->query('type', 'suggestion');
+        if (!in_array($initialType, ['bug', 'suggestion', 'query', 'other'])) {
+            $initialType = 'suggestion';
+        }
+
+        $user = $request->user();
+        $userFeedbacks = $user 
+            ? Feedback::where('user_id', $user->id)->with('repliedBy')->latest()->take(10)->get()
+            : collect();
+
+        return view('pages.feedback', compact('breadcrumbs', 'initialType', 'userFeedbacks'));
     }
 
     /**
@@ -52,12 +62,13 @@ class FeedbackController extends Controller
             );
         }
 
-        $successMsg = 'Thank you for your feedback! Our platform team reviews every report and suggestion to enhance the Fan Hub universe.';
+        $successMsg = "Thank you! Your feedback has been sent to our administration team. Ticket #{$feedback->id} has been recorded.";
 
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'message' => $successMsg,
+                'ticket_id' => $feedback->id,
                 'feedback' => [
                     'id' => $feedback->id,
                     'type' => $feedback->type,
@@ -71,12 +82,11 @@ class FeedbackController extends Controller
 
         if ($request->input('redirect_to') === 'dashboard' || str_contains(url()->previous(), 'dashboard')) {
             return redirect()->route('user.dashboard')
-                ->with('success', $successMsg)
-                ->with('status', $successMsg);
+                ->with('success', $successMsg);
         }
 
         return redirect()->route('feedback.create')
             ->with('success', $successMsg)
-            ->with('status', $successMsg);
+            ->with('ticket_id', $feedback->id);
     }
 }
