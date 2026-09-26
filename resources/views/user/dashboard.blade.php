@@ -46,6 +46,13 @@
         border-color: rgba(229, 9, 20, 0.6);
         box-shadow: 0 4px 15px rgba(229, 9, 20, 0.2);
     }
+    .fh-tab-scroll-bar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .fh-tab-scroll-bar::-webkit-scrollbar {
+        display: none;
+    }
     .dash-item-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid rgba(255, 255, 255, 0.07);
@@ -351,7 +358,7 @@
         <div class="col-lg-8">
             <!-- Navigation Tab Bar -->
             <div class="fh-fan-stat-card p-2 px-3 mb-4" id="dashboardMainTabs">
-                <div class="d-flex align-items-center gap-2 overflow-x-auto py-1" role="tablist">
+                <div class="d-flex flex-wrap align-items-center gap-2 py-1 fh-tab-scroll-bar" role="tablist">
                     <button type="button" class="btn btn-sm dash-tab-btn active px-3 py-2 fw-semibold" id="tab-btn-bookmarks" onclick="switchDashboardTab('bookmarks')">
                         <i class="bi bi-bookmark-star-fill text-warning me-2"></i>Saved Bookmarks
                         <span class="badge bg-warning bg-opacity-25 text-warning ms-2" id="dashBookmarksBadge">{{ $stats['bookmarks_count'] }}</span>
@@ -1043,6 +1050,12 @@ function showDashNotification(message, type = 'success') {
     }, 3200);
 }
 
+// Bind to window to guarantee global availability for inline onclick handlers
+window.switchDashboardTab = switchDashboardTab;
+window.setFeedbackType = setFeedbackType;
+window.openFeedbackModal = openFeedbackModal;
+window.showDashNotification = showDashNotification;
+
 document.addEventListener('DOMContentLoaded', function() {
     Chart.defaults.color = '#94a3b8';
     Chart.defaults.font.family = "'Inter', system-ui, -apple-system, sans-serif";
@@ -1305,6 +1318,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+    }
+
     // 6. Interactive Feedback Type Pills Selection & Live Char Count
     document.querySelectorAll('#feedbackTypePills .feedback-type-pill').forEach(pill => {
         pill.addEventListener('click', function() {
