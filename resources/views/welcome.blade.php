@@ -147,7 +147,8 @@
                             <img src="{{ $content->thumbnail_url ?: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80' }}" 
                                  alt="{{ $content->title }}" 
                                  class="netflix-card-thumb" 
-                                 loading="lazy">
+                                 loading="lazy"
+                                 onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                             <div class="netflix-card-teaser-fx"></div>
                             <span class="netflix-card-badge">TOP 10</span>
                             <span class="netflix-card-top10">#{{ $idx + 1 }}</span>
@@ -238,7 +239,8 @@
                             <img src="{{ $content->thumbnail_url ?: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80' }}" 
                                  alt="{{ $content->title }}" 
                                  class="netflix-card-thumb" 
-                                 loading="lazy">
+                                 loading="lazy"
+                                 onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                             <div class="netflix-card-teaser-fx"></div>
                             <!-- Progress Bar Overlay -->
                             <div class="netflix-card-progress">
@@ -319,7 +321,8 @@
                                 <img src="{{ $content->thumbnail_url ?: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80' }}" 
                                      alt="{{ $content->title }}" 
                                      class="netflix-card-thumb" 
-                                     loading="lazy">
+                                     loading="lazy"
+                                     onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 <div class="netflix-card-teaser-fx"></div>
                                 <span class="netflix-card-badge">ANIME</span>
                             </div>
@@ -401,7 +404,8 @@
                                 <img src="{{ $content->thumbnail_url ?: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80' }}" 
                                      alt="{{ $content->title }}" 
                                      class="netflix-card-thumb" 
-                                     loading="lazy">
+                                     loading="lazy"
+                                     onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 <div class="netflix-card-teaser-fx"></div>
                                 <span class="netflix-card-badge" style="background-color: #06b6d4;">GAMING</span>
                             </div>
@@ -483,7 +487,8 @@
                                 <img src="{{ $content->thumbnail_url ?: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80' }}" 
                                      alt="{{ $content->title }}" 
                                      class="netflix-card-thumb" 
-                                     loading="lazy">
+                                     loading="lazy"
+                                     onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 <div class="netflix-card-teaser-fx"></div>
                                 <span class="netflix-card-badge" style="background-color: #9333ea;">CINEMA</span>
                             </div>

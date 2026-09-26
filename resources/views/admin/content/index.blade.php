@@ -79,8 +79,8 @@
                     @forelse($contents as $c)
                         <tr class="border-secondary border-opacity-10">
                             <td>
-                                @if($c->thumbnail)
-                                    <img src="{{ asset('storage/' . $c->thumbnail) }}" alt="{{ $c->title }}" class="rounded" width="44" height="44" style="object-fit: cover;">
+                                @if($c->thumbnail_url)
+                                    <img src="{{ $c->thumbnail_url }}" alt="{{ $c->title }}" class="rounded" width="44" height="44" style="object-fit: cover;" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 @else
                                     <div class="rounded d-flex align-items-center justify-content-center bg-secondary bg-opacity-25" style="width: 44px; height: 44px;">
                                         <i class="bi {{ $c->category?->icon ?: 'bi-journal-text' }} text-muted"></i>

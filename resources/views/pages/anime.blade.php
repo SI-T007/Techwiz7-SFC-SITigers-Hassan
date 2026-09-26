@@ -85,8 +85,8 @@
 
     <!-- 1. Spotlight Hero Banner -->
     <div class="fh-anime-hero p-4 p-md-5 mb-5 position-relative">
-        @if($spotlight && ($spotlight->thumbnail || $spotlight->cover_image))
-            <div class="fh-anime-hero-backdrop" style="background-image: url('{{ $spotlight->thumbnail ?: $spotlight->cover_image }}');"></div>
+        @if($spotlight)
+            <div class="fh-anime-hero-backdrop" style="background-image: url('{{ $spotlight->hero_thumbnail_url ?: $spotlight->thumbnail_url }}');"></div>
         @endif
         <div class="fh-anime-hero-overlay"></div>
 

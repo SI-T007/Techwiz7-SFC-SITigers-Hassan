@@ -110,9 +110,9 @@
                             </div>
                         @endif
                     </div>
-                @elseif($content->thumbnail)
+                @elseif($content->thumbnail_url)
                     <div class="mb-4 rounded-3 overflow-hidden border border-subtle">
-                        <img src="{{ asset('storage/' . $content->thumbnail) }}" alt="{{ $content->title }}" class="img-fluid w-100" style="max-height: 440px; object-fit: cover;">
+                        <img src="{{ $content->thumbnail_url }}" alt="{{ $content->title }}" class="img-fluid w-100" style="max-height: 440px; object-fit: cover;" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                     </div>
                 @endif
 

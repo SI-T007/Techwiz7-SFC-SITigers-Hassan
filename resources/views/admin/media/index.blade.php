@@ -99,7 +99,7 @@
                         <tr class="border-secondary border-opacity-10">
                             <td>
                                 <div class="position-relative rounded overflow-hidden" style="width: 64px; height: 38px; background: #000;">
-                                    <img src="{{ $media->thumbnail_url }}" alt="{{ $media->title }}" class="w-100 h-100 object-fit-cover" loading="lazy">
+                                    <img src="{{ $media->thumbnail_url }}" alt="{{ $media->title }}" class="w-100 h-100 object-fit-cover" loading="lazy" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                     @if($media->youtube_video_id)
                                         <div class="position-absolute bottom-0 end-0 p-0 text-danger" style="line-height: 1;">
                                             <i class="bi bi-youtube" style="font-size: 0.65rem;"></i>

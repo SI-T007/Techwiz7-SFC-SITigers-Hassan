@@ -153,9 +153,9 @@
                     <!-- Thumbnail Image Upload -->
                     <div class="mb-4">
                         <label for="thumbnail" class="form-label text-light fw-semibold">Hero Thumbnail</label>
-                        @if($content->thumbnail)
+                        @if($content->thumbnail_url)
                             <div class="mb-2 d-flex align-items-center gap-3">
-                                <img src="{{ asset('storage/' . $content->thumbnail) }}" alt="{{ $content->title }}" class="rounded border border-subtle" width="120" height="70" style="object-fit: cover;">
+                                <img src="{{ $content->thumbnail_url }}" alt="{{ $content->title }}" class="rounded border border-subtle" width="120" height="70" style="object-fit: cover;" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 <span class="small text-muted">Upload a new image below to replace the existing thumbnail.</span>
                             </div>
                         @endif

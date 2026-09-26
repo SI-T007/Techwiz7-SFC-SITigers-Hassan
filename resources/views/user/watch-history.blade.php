@@ -369,7 +369,8 @@
                     <img src="{{ $entry->thumbnail ?? 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=60' }}"
                          alt="{{ $entry->title }}"
                          class="wh-card-img"
-                         loading="lazy">
+                         loading="lazy"
+                         onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                     <div class="wh-card-play-overlay">
                         <i class="bi bi-play-circle-fill"></i>
                     </div>

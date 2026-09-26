@@ -212,6 +212,14 @@ class Media extends Model
     }
 
     /**
+     * Alias for type_label used in explore and card views.
+     */
+    public function getTypeLabelAttribute(): string
+    {
+        return $this->media_type_label;
+    }
+
+    /**
      * Average rating accessor.
      */
     public function getRatingsAvgAttribute(): ?float

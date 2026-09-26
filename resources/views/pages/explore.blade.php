@@ -205,7 +205,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="card bg-dark border-subtle h-100 overflow-hidden shadow-sm hover-elevate">
                             <div class="position-relative" style="height: 160px;">
-                                <img src="{{ $m->thumbnail_url }}" alt="{{ $m->title }}" class="w-100 h-100" style="object-fit: cover;">
+                                <img src="{{ $m->thumbnail_url }}" alt="{{ $m->title }}" class="w-100 h-100" style="object-fit: cover;" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 <span class="badge bg-danger position-absolute top-0 end-0 m-2" style="font-size: 0.68rem;">{{ $m->type_label }}</span>
                             </div>
                             <div class="card-body p-3">

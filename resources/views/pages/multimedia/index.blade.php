@@ -39,7 +39,7 @@
             <div class="row g-0 align-items-center">
                 <!-- Video / Thumbnail Frame -->
                 <div class="col-lg-7 position-relative" style="min-height: 360px;">
-                    <img src="{{ $hero->thumbnail_url }}" alt="{{ $hero->title }}" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="filter: brightness(0.85);" loading="eager">
+                    <img src="{{ $hero->thumbnail_url }}" alt="{{ $hero->title }}" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="filter: brightness(0.85);" loading="eager" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                     <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(90deg, transparent 50%, #0a0a0c 100%), linear-gradient(180deg, rgba(10,10,12,0.2) 0%, rgba(10,10,12,0.85) 100%);"></div>
                     
                     <!-- Play Overlay Button -->

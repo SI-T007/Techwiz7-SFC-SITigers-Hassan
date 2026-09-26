@@ -236,7 +236,7 @@
                     @forelse($relatedMedia as $rel)
                         <div class="p-2 rounded-3 border border-subtle d-flex gap-2 align-items-center" style="background: rgba(255,255,255,0.02);">
                             <a href="{{ route('multimedia.show', $rel->id) }}" class="flex-shrink-0 position-relative rounded overflow-hidden" style="width: 80px; height: 50px; background: #000;">
-                                <img src="{{ $rel->thumbnail_url }}" alt="{{ $rel->title }}" class="w-100 h-100 object-fit-cover">
+                                <img src="{{ $rel->thumbnail_url }}" alt="{{ $rel->title }}" class="w-100 h-100 object-fit-cover" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
                                 <div class="position-absolute top-50 start-50 translate-middle text-white" style="text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
                                     <i class="bi bi-play-circle-fill text-danger fs-6"></i>
                                 </div>

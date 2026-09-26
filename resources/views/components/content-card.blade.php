@@ -25,7 +25,8 @@
         <img src="{{ $thumbUrl }}" 
              alt="{{ $content->title }}" 
              class="netflix-card-thumb" 
-             loading="lazy">
+             loading="lazy"
+             onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
         <div class="netflix-card-teaser-fx"></div>
         
         <!-- Category/Type Badge -->

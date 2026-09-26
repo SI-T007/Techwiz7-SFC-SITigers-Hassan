@@ -20,7 +20,8 @@
         <img src="{{ $avatarUrl }}" 
              alt="{{ $character->name }}" 
              class="netflix-card-thumb" 
-             loading="lazy">
+             loading="lazy"
+             onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
         <div class="netflix-card-teaser-fx"></div>
         <span class="netflix-card-badge" style="background-color: #06b6d4;">DOSSIER</span>
     </div>

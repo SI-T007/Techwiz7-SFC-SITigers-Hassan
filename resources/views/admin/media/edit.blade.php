@@ -213,14 +213,10 @@
                     <!-- Custom Thumbnail Upload -->
                     <div class="mb-4">
                         <label for="thumbnail" class="form-label text-light fw-semibold">Custom Thumbnail Cover (Optional Override)</label>
-                        @if($media->thumbnail)
-                            <div class="mb-2">
-                                <img src="{{ asset('storage/' . $media->thumbnail) }}" alt="{{ $media->title }}" class="rounded" width="80" height="48" style="object-fit: cover;">
-                            </div>
-                        @elseif($media->youtube_thumbnail_url)
-                            <div class="mb-2">
-                                <img src="{{ $media->youtube_thumbnail_url }}" alt="{{ $media->title }}" class="rounded" width="80" height="48" style="object-fit: cover;">
-                                <span class="small text-muted ms-2">Using YouTube High-Res Poster</span>
+                        @if($media->thumbnail_url)
+                            <div class="mb-2 d-flex align-items-center gap-2">
+                                <img src="{{ $media->thumbnail_url }}" alt="{{ $media->title }}" class="rounded border border-subtle" width="80" height="48" style="object-fit: cover;" onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
+                                <span class="small text-muted">Current Active Thumbnail</span>
                             </div>
                         @endif
                         <input type="file" 

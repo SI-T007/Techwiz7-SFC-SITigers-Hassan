@@ -8,7 +8,8 @@
         <img src="{{ $release->cover_image_url }}" 
              alt="{{ $release->title }}" 
              class="w-100 h-100 object-fit-cover"
-             loading="lazy">
+             loading="lazy"
+             onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(10,10,12,0.2) 0%, rgba(10,10,12,0.9) 100%);"></div>
 
         <!-- Top Badges -->

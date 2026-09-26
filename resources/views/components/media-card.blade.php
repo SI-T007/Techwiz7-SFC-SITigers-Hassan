@@ -8,7 +8,8 @@
         <img src="{{ $media->thumbnail_url }}" 
              alt="{{ $media->title }}" 
              class="w-100 h-100 object-fit-cover transition-transform"
-             loading="lazy">
+             loading="lazy"
+             onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
 
         <!-- Top Badges -->
         <div class="position-absolute top-0 start-0 p-2 d-flex flex-wrap gap-1 z-2">

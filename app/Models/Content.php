@@ -127,6 +127,7 @@ class Content extends Model
     public function getThumbnailUrlAttribute(): string
     {
         if ($this->thumbnail && (str_starts_with($this->thumbnail, 'http://') || str_starts_with($this->thumbnail, 'https://'))) {
+            // Prefer hqdefault for reliability if it's a YouTube link, or return external URL
             return $this->thumbnail;
         }
 
@@ -137,7 +138,7 @@ class Content extends Model
         if ($this->media_url) {
             $ytId = \App\Models\Media::extractYouTubeId($this->media_url);
             if ($ytId) {
-                return 'https://img.youtube.com/vi/' . urlencode($ytId) . '/maxresdefault.jpg';
+                return 'https://img.youtube.com/vi/' . urlencode($ytId) . '/hqdefault.jpg';
             }
         }
 
@@ -158,7 +159,7 @@ class Content extends Model
         }
 
         if ($this->thumbnail && (str_starts_with($this->thumbnail, 'http://') || str_starts_with($this->thumbnail, 'https://'))) {
-            return preg_replace('/\/(hqdefault|mqdefault|sddefault)\.jpg$/', '/maxresdefault.jpg', $this->thumbnail);
+            return $this->thumbnail;
         }
 
         if ($this->thumbnail && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->thumbnail)) {
@@ -168,7 +169,7 @@ class Content extends Model
         if ($this->media_url) {
             $ytId = \App\Models\Media::extractYouTubeId($this->media_url);
             if ($ytId) {
-                return 'https://img.youtube.com/vi/' . urlencode($ytId) . '/maxresdefault.jpg';
+                return 'https://img.youtube.com/vi/' . urlencode($ytId) . '/hqdefault.jpg';
             }
         }
 
