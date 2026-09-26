@@ -120,6 +120,18 @@
             transform: translateY(0);
         }
     }
+    .fh-feedback-floating-btn {
+        background: linear-gradient(135deg, #e50914 0%, #ea580c 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        box-shadow: 0 8px 25px rgba(229, 9, 20, 0.45) !important;
+        transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease !important;
+    }
+    .fh-feedback-floating-btn:hover {
+        transform: translateY(-3px) scale(1.03) !important;
+        box-shadow: 0 12px 32px rgba(229, 9, 20, 0.65) !important;
+        color: #ffffff !important;
+    }
 </style>
 @endpush
 
@@ -183,8 +195,8 @@
                 <a href="{{ route('profile.show') }}" class="btn btn-outline-custom">
                     <i class="bi bi-eye me-1"></i> View Public Profile
                 </a>
-                <button type="button" class="btn btn-outline-danger btn-sm" onclick="switchDashboardTab('feedback')">
-                    <i class="bi bi-chat-left-dots-fill me-1"></i> Feedback & Suggestions
+                <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center gap-2" style="background: linear-gradient(135deg, #e50914 0%, #b20710 100%); border: none; box-shadow: 0 4px 14px rgba(229, 9, 20, 0.4);" onclick="switchDashboardTab('feedback'); document.getElementById('dashboardMainTabs').scrollIntoView({behavior:'smooth'});">
+                    <i class="bi bi-chat-left-heart-fill"></i> Give Feedback / Bug
                 </button>
             </div>
         </div>
@@ -192,7 +204,7 @@
 
     <!-- Quick Stats Grid -->
     <div class="row g-3 mb-4">
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-md-4 col-xl">
             <div class="fh-fan-stat-card p-3 h-100 hover-lift" style="cursor: pointer;" onclick="switchDashboardTab('fandoms')" title="View My Fandoms">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="text-muted small">Favorite Fandoms</span>
@@ -204,7 +216,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-md-4 col-xl">
             <div class="fh-fan-stat-card p-3 h-100 hover-lift" style="cursor: pointer;" onclick="switchDashboardTab('bookmarks')" title="View Saved Bookmarks">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="text-muted small">Saved Bookmarks</span>
@@ -216,7 +228,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-md-4 col-xl">
             <div class="fh-fan-stat-card p-3 h-100 hover-lift" style="cursor: pointer;" onclick="switchDashboardTab('ratings')" title="View My Ratings & Reviews">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="text-muted small">Reviews & Ratings</span>
@@ -228,7 +240,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-md-4 col-xl">
             <div class="fh-fan-stat-card p-3 h-100 hover-lift">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="text-muted small">Fan Submissions</span>
@@ -240,10 +252,22 @@
                 </a>
             </div>
         </div>
+        <div class="col-6 col-md-4 col-xl">
+            <div class="fh-fan-stat-card p-3 h-100 hover-lift" style="cursor: pointer;" onclick="switchDashboardTab('feedback')" title="Feedback & Error Reports">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small">Feedback & Bugs</span>
+                    <i class="bi bi-chat-left-heart-fill text-danger fs-5"></i>
+                </div>
+                <div class="h3 fw-bold text-light mb-0" id="statFeedbackCount">{{ $stats['feedback_count'] ?? 0 }}</div>
+                <div class="small text-danger mt-2 d-inline-flex align-items-center gap-1">
+                    <span>Give feedback</span> &rarr;
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Watch History Quick Access Banner -->
-    <div class="fh-fan-stat-card p-3 mb-4 d-flex align-items-center gap-4 flex-wrap">
+    <div class="fh-fan-stat-card p-3 mb-3 d-flex align-items-center gap-4 flex-wrap">
         <div class="d-flex align-items-center gap-3 flex-grow-1">
             <div class="rounded-3 d-flex align-items-center justify-content-center text-info flex-shrink-0"
                  style="width: 48px; height: 48px; background: rgba(6,182,212,0.12); font-size: 1.5rem;">
@@ -257,6 +281,29 @@
         <a href="{{ route('watch-history.index') }}" class="btn btn-sm" style="background: rgba(6,182,212,0.15); color: #06b6d4; border: 1px solid rgba(6,182,212,0.3);">
             <i class="bi bi-play-circle me-1"></i> View History
         </a>
+    </div>
+
+    <!-- Dedicated Feedback & Error Suggestion Action Banner -->
+    <div class="fh-fan-stat-card p-3 mb-4 d-flex align-items-center justify-content-between gap-3 flex-wrap hover-lift"
+         style="background: linear-gradient(135deg, rgba(229, 9, 20, 0.12), rgba(20, 24, 38, 0.85)); border: 1px solid rgba(229, 9, 20, 0.35); box-shadow: 0 8px 24px -6px rgba(229, 9, 20, 0.2);">
+        <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 d-flex align-items-center justify-content-center text-danger flex-shrink-0"
+                 style="width: 48px; height: 48px; background: rgba(229, 9, 20, 0.18); font-size: 1.5rem;">
+                <i class="bi bi-chat-left-heart-fill"></i>
+            </div>
+            <div>
+                <div class="fw-bold text-light fs-6">Feedback & Error Suggestions Hub</div>
+                <div class="small text-muted">Suggest new fandom realms, request features, or report playback/glitch errors directly to our engineering team</div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <button type="button" class="btn btn-sm btn-primary-gradient px-3 py-2 fw-semibold" onclick="switchDashboardTab('feedback'); setFeedbackType('suggestion');">
+                <i class="bi bi-lightbulb-fill me-1"></i> Give Suggestion
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger px-3 py-2 fw-semibold" onclick="switchDashboardTab('feedback'); setFeedbackType('bug');">
+                <i class="bi bi-bug-fill me-1"></i> Report an Error
+            </button>
+        </div>
     </div>
 
     <!-- Personal Graphical Fan Analytics Section -->
@@ -882,6 +929,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Floating Quick-Feedback & Bug Launcher Button (Always visible on dashboard) -->
+    <div class="position-fixed d-flex align-items-center" style="bottom: 90px; right: 20px; z-index: 1039;">
+        <button type="button" 
+                onclick="switchDashboardTab('feedback'); document.getElementById('dashboardMainTabs').scrollIntoView({behavior:'smooth'});"
+                class="btn rounded-pill shadow-lg d-flex align-items-center gap-2 px-3 py-2 text-white border-0 fh-feedback-floating-btn"
+                title="Give Feedback or Report a Bug">
+            <i class="bi bi-chat-left-heart-fill"></i>
+            <span class="d-none d-sm-inline fw-semibold" style="font-size: 0.85rem;">Feedback & Bugs</span>
+            <span class="badge bg-white text-danger fw-bold ms-1" style="font-size: 0.72rem; border-radius: 9999px;" id="floatingFeedbackBadge">{{ $stats['feedback_count'] ?? 0 }}</span>
+        </button>
+    </div>
 </div>
 @endsection
 
@@ -1295,6 +1354,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (histBadge) {
                         const currHist = parseInt(histBadge.textContent.trim()) || 0;
                         histBadge.textContent = currHist + 1;
+                    }
+                    const floatBadge = document.getElementById('floatingFeedbackBadge');
+                    if (floatBadge) {
+                        const curFloat = parseInt(floatBadge.textContent.trim()) || 0;
+                        floatBadge.textContent = curFloat + 1;
+                    }
+                    const statCount = document.getElementById('statFeedbackCount');
+                    if (statCount) {
+                        const curStat = parseInt(statCount.textContent.trim()) || 0;
+                        statCount.textContent = curStat + 1;
                     }
 
                     // Remove empty state if present

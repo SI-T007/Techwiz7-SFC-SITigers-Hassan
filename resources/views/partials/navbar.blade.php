@@ -275,6 +275,9 @@
            href="{{ route('community.submit') }}">
             <i class="bi bi-plus-circle text-success"></i> Submit Fan Work
         </a>
+        <a class="fh-sidebar-link" href="{{ route('user.dashboard') }}#feedback">
+            <i class="bi bi-chat-left-heart-fill text-danger"></i> Give Feedback / Bugs
+        </a>
     </div>
 
     {{-- Section: Explore Realms --}}
