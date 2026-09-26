@@ -65,6 +65,12 @@
             <a href="{{ route('admin.articles.index') }}" class="btn btn-outline-light btn-sm">
                 <i class="bi bi-file-text me-1"></i> Articles
             </a>
+            <a href="{{ route('admin.feedback.index') }}" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-chat-left-dots me-1"></i> Feedback
+                @if(isset($metrics['new_feedback']) && $metrics['new_feedback'] > 0)
+                    <span class="badge bg-danger ms-1">{{ $metrics['new_feedback'] }}</span>
+                @endif
+            </a>
             <a href="{{ route('admin.users') }}" class="btn btn-outline-light btn-sm">
                 <i class="bi bi-person-gear me-1"></i> Users ({{ $metrics['total_users'] }})
             </a>
@@ -345,7 +351,16 @@
                         <div class="list-group-item bg-transparent text-light px-0 py-2 border-secondary border-opacity-25">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <span class="badge bg-primary bg-opacity-25 text-primary me-2 small">{{ $act->activity_type }}</span>
+                                    @php
+                                        $actBadge = match($act->activity_type) {
+                                            'submitted_feedback' => 'bg-danger bg-opacity-25 text-danger',
+                                            'bookmarked' => 'bg-warning bg-opacity-25 text-warning',
+                                            'rated' => 'bg-info bg-opacity-25 text-info',
+                                            'submitted_fan_content' => 'bg-success bg-opacity-25 text-success',
+                                            default => 'bg-primary bg-opacity-25 text-primary',
+                                        };
+                                    @endphp
+                                    <span class="badge {{ $actBadge }} me-2 small text-capitalize">{{ str_replace('_', ' ', $act->activity_type) }}</span>
                                     <span class="text-light small">{{ $act->description }}</span>
                                 </div>
                                 <span class="text-muted small" style="font-size: 0.72rem;">{{ $act->created_at->diffForHumans() }}</span>

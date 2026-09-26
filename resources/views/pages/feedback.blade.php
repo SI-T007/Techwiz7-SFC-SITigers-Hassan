@@ -13,7 +13,14 @@
                 <div class="text-center mb-4">
                     <span class="small text-info fw-bold text-uppercase" style="letter-spacing: 0.08em;">Community Voice</span>
                     <h1 class="h2 fw-bold text-light mb-1">Platform Feedback & Bug Reports</h1>
-                    <p class="text-muted small">Help us improve Fan Hub Plus. Report bugs, propose new fandoms, or submit general inquiries</p>
+                    <p class="text-muted small mb-2">Help us improve Fan Hub Plus. Report bugs, propose new fandoms, or submit general inquiries</p>
+                    @auth
+                        <div>
+                            <a href="{{ route('user.dashboard') }}#feedback" class="badge bg-danger bg-opacity-25 text-danger border border-danger border-opacity-25 text-decoration-none py-1.5 px-3">
+                                <i class="bi bi-clock-history me-1"></i> Track your past tickets & admin replies in User Dashboard &rarr;
+                            </a>
+                        </div>
+                    @endauth
                 </div>
 
                 <form method="POST" action="{{ route('feedback.store') }}">
