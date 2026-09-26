@@ -70,6 +70,56 @@
     .hover-lift:hover {
         transform: translateY(-3px);
     }
+    .feedback-type-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #94a3b8;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        user-select: none;
+    }
+    .feedback-type-pill:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+    .feedback-type-pill.active {
+        background: rgba(229, 9, 20, 0.15);
+        border-color: rgba(229, 9, 20, 0.6);
+        color: #ffffff;
+        box-shadow: 0 0 14px rgba(229, 9, 20, 0.3);
+    }
+    .feedback-type-pill[data-type="suggestion"].active {
+        background: rgba(245, 158, 11, 0.15);
+        border-color: rgba(245, 158, 11, 0.6);
+        box-shadow: 0 0 14px rgba(245, 158, 11, 0.3);
+    }
+    .feedback-type-pill[data-type="query"].active {
+        background: rgba(6, 182, 212, 0.15);
+        border-color: rgba(6, 182, 212, 0.6);
+        box-shadow: 0 0 14px rgba(6, 182, 212, 0.3);
+    }
+    .feedback-type-pill[data-type="other"].active {
+        background: rgba(139, 92, 246, 0.15);
+        border-color: rgba(139, 92, 246, 0.6);
+        box-shadow: 0 0 14px rgba(139, 92, 246, 0.3);
+    }
+    @keyframes fbCardSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 </style>
 @endpush
 
@@ -133,6 +183,9 @@
                 <a href="{{ route('profile.show') }}" class="btn btn-outline-custom">
                     <i class="bi bi-eye me-1"></i> View Public Profile
                 </a>
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="switchDashboardTab('feedback')">
+                    <i class="bi bi-chat-left-dots-fill me-1"></i> Feedback & Suggestions
+                </button>
             </div>
         </div>
     </div>
@@ -263,6 +316,10 @@
                     <button type="button" class="btn btn-sm dash-tab-btn px-3 py-2 fw-semibold" id="tab-btn-fandoms" onclick="switchDashboardTab('fandoms')">
                         <i class="bi bi-heart-fill text-danger me-2"></i>My Fandoms
                         <span class="badge bg-danger bg-opacity-25 text-danger ms-2">{{ $stats['fandoms_count'] }}</span>
+                    </button>
+                    <button type="button" class="btn btn-sm dash-tab-btn px-3 py-2 fw-semibold" id="tab-btn-feedback" onclick="switchDashboardTab('feedback')">
+                        <i class="bi bi-chat-left-heart-fill text-danger me-2"></i>Feedback & Suggestions
+                        <span class="badge bg-danger bg-opacity-25 text-danger ms-2" id="dashFeedbackBadge">{{ $stats['feedback_count'] ?? 0 }}</span>
                     </button>
                 </div>
             </div>
@@ -622,10 +679,176 @@
                     </div>
                 @endif
             </div>
+
+            <!-- Tab Pane 4: Feedback & Error Suggestions -->
+            <div class="dash-tab-pane d-none" id="pane-feedback">
+                <div class="fh-fan-stat-card p-4 mb-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                        <div>
+                            <h5 class="fw-bold text-light mb-1">
+                                <i class="bi bi-chat-left-heart-fill text-danger me-2"></i>Feedback & Error Suggestions
+                            </h5>
+                            <p class="text-muted small mb-0">Submit ideas for new fandom realms, report bugs or broken features, and track status updates directly from the platform team.</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-warning" onclick="setFeedbackType('suggestion')">
+                                <i class="bi bi-lightbulb-fill me-1"></i> New Suggestion
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="setFeedbackType('bug')">
+                                <i class="bi bi-bug-fill me-1"></i> Report Error
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Submission Form Container -->
+                    <div class="p-3 p-md-4 rounded-3 border border-secondary border-opacity-25 mb-4 position-relative" style="background: rgba(255,255,255,0.02);">
+                        <form id="dashFeedbackInlineForm" action="{{ route('feedback.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="redirect_to" value="dashboard">
+                            
+                            <!-- Type Selection Pills -->
+                            <div class="mb-3">
+                                <label class="form-label text-light small fw-bold text-uppercase" style="letter-spacing: 0.05em;">Feedback Category</label>
+                                <div class="d-flex flex-wrap gap-2" id="feedbackTypePills">
+                                    <label class="feedback-type-pill active" data-type="suggestion">
+                                        <input type="radio" name="type" value="suggestion" class="d-none" checked>
+                                        <i class="bi bi-lightbulb-fill text-warning me-1"></i> Suggestion / Idea
+                                    </label>
+                                    <label class="feedback-type-pill" data-type="bug">
+                                        <input type="radio" name="type" value="bug" class="d-none">
+                                        <i class="bi bi-bug-fill text-danger me-1"></i> Error / Bug Report
+                                    </label>
+                                    <label class="feedback-type-pill" data-type="query">
+                                        <input type="radio" name="type" value="query" class="d-none">
+                                        <i class="bi bi-question-circle-fill text-info me-1"></i> Question / Help
+                                    </label>
+                                    <label class="feedback-type-pill" data-type="other">
+                                        <input type="radio" name="type" value="other" class="d-none">
+                                        <i class="bi bi-chat-heart-fill text-primary me-1"></i> General Feedback
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-7">
+                                    <label for="fbSubject" class="form-label text-light small fw-semibold">Subject / Topic <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control bg-dark border-secondary border-opacity-50 text-light" id="fbSubject" name="subject" required maxlength="500" placeholder="E.g., Suggest adding Demon Slayer universe lore or season 4 drop...">
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="fbContext" class="form-label text-light small fw-semibold">Affected Page / Realm <span class="text-muted">(Optional)</span></label>
+                                    <input type="text" class="form-control bg-dark border-secondary border-opacity-50 text-light" id="fbContext" name="context" placeholder="E.g., /events, /multimedia, character archive...">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label for="fbMessage" class="form-label text-light small fw-semibold mb-0">Detailed Description <span class="text-danger">*</span></label>
+                                    <span class="text-muted small" id="fbCharCount">0 / 3000</span>
+                                </div>
+                                <textarea class="form-control bg-dark border-secondary border-opacity-50 text-light" id="fbMessage" name="message" rows="4" required maxlength="3000" placeholder="Describe your suggestion or provide steps to reproduce the error you encountered..."></textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pt-2">
+                                <span class="text-muted small">
+                                    <i class="bi bi-shield-check text-success me-1"></i> Submitting as <strong class="text-light">{{ $user->name }}</strong> ({{ $user->email }})
+                                </span>
+                                <button type="submit" class="btn btn-primary-gradient px-4" id="fbSubmitBtn">
+                                    <i class="bi bi-send-fill me-2"></i> Submit Feedback
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- User Feedback Submissions History -->
+                    <h6 class="fw-bold text-light mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-clock-history text-info"></i> Your Previous Submissions & Status
+                        <span class="badge bg-secondary bg-opacity-25 text-light" id="fbHistoryCount">{{ $userFeedback->count() }}</span>
+                    </h6>
+
+                    <div id="userFeedbackHistoryList" class="d-flex flex-column gap-3">
+                        @forelse($userFeedback as $fb)
+                            @php
+                                $typeBadge = match($fb->type) {
+                                    'bug' => ['class' => 'bg-danger bg-opacity-25 text-danger border border-danger border-opacity-25', 'icon' => 'bi-bug-fill', 'label' => 'Bug Report'],
+                                    'suggestion' => ['class' => 'bg-warning bg-opacity-25 text-warning border border-warning border-opacity-25', 'icon' => 'bi-lightbulb-fill', 'label' => 'Suggestion'],
+                                    'query' => ['class' => 'bg-info bg-opacity-25 text-info border border-info border-opacity-25', 'icon' => 'bi-question-circle-fill', 'label' => 'Question'],
+                                    default => ['class' => 'bg-primary bg-opacity-25 text-primary border border-primary border-opacity-25', 'icon' => 'bi-chat-heart-fill', 'label' => 'Feedback'],
+                                };
+
+                                $statusBadge = match($fb->status) {
+                                    'read' => ['class' => 'bg-info bg-opacity-25 text-info border border-info border-opacity-25', 'icon' => 'bi-eye-fill', 'label' => 'Under Review'],
+                                    'replied' => ['class' => 'bg-success bg-opacity-25 text-success border border-success border-opacity-25', 'icon' => 'bi-check2-circle', 'label' => 'Replied & Resolved'],
+                                    default => ['class' => 'bg-warning bg-opacity-25 text-warning border border-warning border-opacity-25', 'icon' => 'bi-hourglass-split', 'label' => 'Pending Review'],
+                                };
+                            @endphp
+                            <div class="p-3 rounded-3 border border-secondary border-opacity-25 feedback-item-card" style="background: rgba(255,255,255,0.02); transition: all 0.2s ease;">
+                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge {{ $typeBadge['class'] }} small">
+                                            <i class="bi {{ $typeBadge['icon'] }} me-1"></i> {{ $typeBadge['label'] }}
+                                        </span>
+                                        <span class="badge {{ $statusBadge['class'] }} small">
+                                            <i class="bi {{ $statusBadge['icon'] }} me-1"></i> {{ $statusBadge['label'] }}
+                                        </span>
+                                    </div>
+                                    <span class="text-muted small" title="{{ $fb->created_at->format('M d, Y H:i') }}">
+                                        {{ $fb->created_at->diffForHumans() }}
+                                    </span>
+                                </div>
+                                <h6 class="text-light fw-bold mb-2">{{ $fb->subject }}</h6>
+                                <p class="text-muted small mb-2 text-break">{{ $fb->message }}</p>
+
+                                @if($fb->admin_reply)
+                                    <div class="p-3 mt-3 rounded-3 border border-success border-opacity-25" style="background: rgba(16, 185, 129, 0.08);">
+                                        <div class="d-flex align-items-center gap-2 text-success small fw-bold mb-1">
+                                            <i class="bi bi-patch-check-fill"></i>
+                                            Official Response from {{ $fb->repliedBy?->name ?? 'Platform Team' }}
+                                            <span class="text-muted fw-normal ms-auto" style="font-size: 0.75rem;">
+                                                {{ $fb->replied_at ? $fb->replied_at->diffForHumans() : 'Recently' }}
+                                            </span>
+                                        </div>
+                                        <div class="text-light small text-break mb-0">
+                                            {{ $fb->admin_reply }}
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @empty
+                            <div class="text-center py-5 border border-dashed border-secondary border-opacity-25 rounded-3" id="fbEmptyState">
+                                <i class="bi bi-chat-left-dots fs-2 text-danger mb-2 d-block"></i>
+                                <h6 class="text-light fw-bold">No feedback submitted yet</h6>
+                                <p class="small text-muted mb-3">Notice an error, missing character info, or have an idea to improve the Fan Hub experience? Let us know!</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Right Column: Recent Activity Feed -->
-        <div class="col-lg-4">
+        <!-- Right Column: Recent Activity Feed & Feedback Action -->
+        <div class="col-lg-4 d-flex flex-column gap-4">
+            <!-- Submit Feedback / Report Bug Quick Action Card -->
+            <div class="fh-fan-stat-card p-4 position-relative overflow-hidden" style="background: linear-gradient(145deg, rgba(229, 9, 20, 0.08), rgba(20, 24, 38, 0.7)); border: 1px solid rgba(229, 9, 20, 0.25);">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="rounded-3 d-flex align-items-center justify-content-center text-danger flex-shrink-0"
+                         style="width: 44px; height: 44px; background: rgba(229, 9, 20, 0.15); font-size: 1.4rem;">
+                        <i class="bi bi-chat-left-dots-fill"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold text-light mb-0">Help Shape the Multiverse</h6>
+                        <small class="text-muted">Suggest features or report errors</small>
+                    </div>
+                </div>
+                <p class="small text-muted mb-3">Found a broken link, visual glitch, or have an idea for a new fandom realm? Share it directly with our engineers.</p>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-sm btn-primary-gradient flex-grow-1" onclick="switchDashboardTab('feedback'); setFeedbackType('suggestion');">
+                        <i class="bi bi-lightbulb-fill me-1"></i> Give Idea
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="switchDashboardTab('feedback'); setFeedbackType('bug');" title="Report a Bug or Error">
+                        <i class="bi bi-bug-fill me-1"></i> Report Error
+                    </button>
+                </div>
+            </div>
             <div class="fh-fan-stat-card p-4 h-100">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold text-light mb-0">
@@ -666,7 +889,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
 function switchDashboardTab(tabName) {
-    const tabs = ['bookmarks', 'ratings', 'fandoms'];
+    const tabs = ['bookmarks', 'ratings', 'fandoms', 'feedback'];
     tabs.forEach(t => {
         const btn = document.getElementById(`tab-btn-${t}`);
         const pane = document.getElementById(`pane-${t}`);
@@ -693,6 +916,46 @@ function switchDashboardTab(tabName) {
     const container = document.getElementById('dashboardMainTabs');
     if (container && window.scrollY > container.offsetTop - 80) {
         container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+function setFeedbackType(type) {
+    const pills = document.querySelectorAll('#feedbackTypePills .feedback-type-pill');
+    pills.forEach(pill => {
+        const input = pill.querySelector('input[type="radio"]');
+        if (pill.dataset.type === type) {
+            pill.classList.add('active');
+            if (input) input.checked = true;
+        } else {
+            pill.classList.remove('active');
+            if (input) input.checked = false;
+        }
+    });
+
+    const subjectInput = document.getElementById('fbSubject');
+    if (subjectInput) {
+        if (type === 'bug') {
+            subjectInput.placeholder = 'E.g., Broken video playback on mobile, character page missing stats, 404 error...';
+        } else if (type === 'suggestion') {
+            subjectInput.placeholder = 'E.g., Suggest adding Demon Slayer universe lore or watch progress sync...';
+        } else if (type === 'query') {
+            subjectInput.placeholder = 'E.g., How do I submit my fan art to the community hub?';
+        } else {
+            subjectInput.placeholder = 'E.g., My thoughts on the new cinematic streaming layout...';
+        }
+    }
+}
+
+function openFeedbackModal(type = 'suggestion') {
+    switchDashboardTab('feedback');
+    setFeedbackType(type);
+    const formBox = document.getElementById('dashFeedbackInlineForm');
+    if (formBox) {
+        formBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+            const subject = document.getElementById('fbSubject');
+            if (subject) subject.focus();
+        }, 300);
     }
 }
 
@@ -726,6 +989,10 @@ document.addEventListener('DOMContentLoaded', function() {
         switchDashboardTab('ratings');
     } else if (window.location.hash === '#fandoms') {
         switchDashboardTab('fandoms');
+    } else if (window.location.hash === '#feedback' || window.location.hash === '#error' || window.location.hash === '#suggestions') {
+        switchDashboardTab('feedback');
+        if (window.location.hash === '#error') setFeedbackType('bug');
+        if (window.location.hash === '#suggestions') setFeedbackType('suggestion');
     } else if (window.location.hash === '#bookmarks') {
         switchDashboardTab('bookmarks');
     }
@@ -971,6 +1238,116 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+    // 6. Interactive Feedback Type Pills Selection & Live Char Count
+    document.querySelectorAll('#feedbackTypePills .feedback-type-pill').forEach(pill => {
+        pill.addEventListener('click', function() {
+            setFeedbackType(this.dataset.type);
+        });
+    });
+
+    const fbMsg = document.getElementById('fbMessage');
+    const fbCount = document.getElementById('fbCharCount');
+    if (fbMsg && fbCount) {
+        fbMsg.addEventListener('input', () => {
+            fbCount.textContent = `${fbMsg.value.length} / 3000`;
+        });
+    }
+
+    // 7. AJAX Feedback & Error Report Form Submission
+    const feedbackForm = document.getElementById('dashFeedbackInlineForm');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('fbSubmitBtn');
+            const originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Submitting...';
+
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+
+                if (data.success) {
+                    showDashNotification(data.message, 'success');
+                    feedbackForm.reset();
+                    if (fbCount) fbCount.textContent = '0 / 3000';
+                    setFeedbackType('suggestion');
+
+                    // Update badge counters
+                    const badge = document.getElementById('dashFeedbackBadge');
+                    if (badge) {
+                        const cur = parseInt(badge.textContent.trim()) || 0;
+                        badge.textContent = cur + 1;
+                    }
+                    const histBadge = document.getElementById('fbHistoryCount');
+                    if (histBadge) {
+                        const currHist = parseInt(histBadge.textContent.trim()) || 0;
+                        histBadge.textContent = currHist + 1;
+                    }
+
+                    // Remove empty state if present
+                    const empty = document.getElementById('fbEmptyState');
+                    if (empty) empty.remove();
+
+                    // Prepend card to history with slide-down animation
+                    const historyList = document.getElementById('userFeedbackHistoryList');
+                    if (historyList && data.feedback) {
+                        const fb = data.feedback;
+                        const typeConfig = {
+                            bug: { class: 'bg-danger bg-opacity-25 text-danger border border-danger border-opacity-25', icon: 'bi-bug-fill', label: 'Bug Report' },
+                            suggestion: { class: 'bg-warning bg-opacity-25 text-warning border border-warning border-opacity-25', icon: 'bi-lightbulb-fill', label: 'Suggestion' },
+                            query: { class: 'bg-info bg-opacity-25 text-info border border-info border-opacity-25', icon: 'bi-question-circle-fill', label: 'Question' },
+                            other: { class: 'bg-primary bg-opacity-25 text-primary border border-primary border-opacity-25', icon: 'bi-chat-heart-fill', label: 'Feedback' },
+                        }[fb.type] || { class: 'bg-primary bg-opacity-25 text-primary', icon: 'bi-chat-heart-fill', label: 'Feedback' };
+
+                        const newCard = document.createElement('div');
+                        newCard.className = 'p-3 rounded-3 border border-secondary border-opacity-25 feedback-item-card';
+                        newCard.style.cssText = 'background: rgba(255,255,255,0.02); animation: fbCardSlideIn 0.35s ease-out both;';
+                        newCard.innerHTML = `
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="badge ${typeConfig.class} small">
+                                        <i class="bi ${typeConfig.icon} me-1"></i> ${typeConfig.label}
+                                    </span>
+                                    <span class="badge bg-warning bg-opacity-25 text-warning border border-warning border-opacity-25 small">
+                                        <i class="bi bi-hourglass-split me-1"></i> Pending Review
+                                    </span>
+                                </div>
+                                <span class="text-muted small">Just now</span>
+                            </div>
+                            <h6 class="text-light fw-bold mb-2">${escapeHtml(fb.subject)}</h6>
+                            <p class="text-muted small mb-0 text-break">${escapeHtml(fb.message)}</p>
+                        `;
+                        historyList.prepend(newCard);
+                    }
+                } else {
+                    showDashNotification(data.message || 'Error submitting feedback. Please try again.', 'error');
+                }
+            })
+            .catch(err => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+                showDashNotification('Submission error. Please verify your inputs and try again.', 'error');
+            });
+        });
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 });
 </script>

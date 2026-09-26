@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bookmark;
 use App\Models\Category;
 use App\Models\Content;
+use App\Models\Feedback;
 use App\Models\Rating;
 use App\Models\UserActivity;
 use App\Models\WatchHistory;
@@ -30,6 +31,7 @@ class DashboardController extends Controller
             'ratings_count'       => $user->ratings()->count(),
             'submissions_count'   => $user->fanSubmissions()->count(),
             'watch_history_count' => WatchHistory::where('user_id', $user->id)->count(),
+            'feedback_count'      => Feedback::where('user_id', $user->id)->count(),
         ];
 
         // Favorite fandoms
@@ -127,6 +129,13 @@ class DashboardController extends Controller
         $userAvgRating = $user->ratings()->avg('score');
         $userAvgRating = $userAvgRating ? round((float) $userAvgRating, 1) : null;
 
+        // User Feedback & Error Suggestions
+        $userFeedback = Feedback::where('user_id', $user->id)
+            ->with('repliedBy')
+            ->latest()
+            ->take(15)
+            ->get();
+
         return view('user.dashboard', compact(
             'user',
             'stats',
@@ -143,7 +152,8 @@ class DashboardController extends Controller
             'fanRankTitle',
             'userBookmarks',
             'userRatingsList',
-            'userAvgRating'
+            'userAvgRating',
+            'userFeedback'
         ));
     }
 }
