@@ -1,0 +1,2309 @@
+/**
+ * Fan Hub Plus — Unified UI/UX Design System & Tokens
+ * Modern, Cinematic, Mature Fandom Platform
+ */
+
+/* ==========================================================================
+   1. Design Tokens — Dark Mode (Default)
+   ========================================================================== */
+:root,
+[data-bs-theme="dark"] {
+    --fh-accent: #e50914; /* Netflix Red Accent (Customizable) */
+    --fh-bg-main: #141414; /* Dark Cinematic Canvas */
+    --fh-bg-surface: #181818;
+    --fh-bg-surface-elevated: #242424;
+    --fh-bg-surface-hover: #2f2f2f;
+    --fh-bg-glass: rgba(20, 20, 20, 0.88);
+
+    --fh-border: rgba(255, 255, 255, 0.12);
+    --fh-border-subtle: rgba(255, 255, 255, 0.06);
+    --fh-border-hover: rgba(229, 9, 20, 0.5);
+
+    --fh-text-primary: #ffffff;
+    --fh-text-secondary: #e5e5e5;
+    --fh-text-muted: #808080;
+    --fh-text-inverse: #141414;
+
+    --fh-primary: var(--fh-accent);
+    --fh-primary-hover: #b80710;
+    --fh-primary-rgb: 229, 9, 20;
+    
+    --fh-accent-cyan: #06b6d4;
+    --fh-accent-purple: #9333ea;
+    --fh-accent-pink: #e50914;
+    --fh-accent-amber: #f59e0b;
+    --fh-accent-emerald: #46d369;
+    --fh-accent-crimson: #e50914;
+
+    --fh-gradient-brand: linear-gradient(135deg, #e50914 0%, #b80710 60%, #831010 100%);
+    --fh-gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+    --fh-gradient-glow: radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.25) 0%, transparent 70%);
+
+    --fh-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --fh-shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.7);
+    --fh-shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.9);
+    --fh-shadow-glow: 0 0 24px rgba(229, 9, 20, 0.45);
+
+    --fh-navbar-bg: rgba(20, 20, 20, 0.95);
+    --fh-footer-bg: #101010;
+}
+
+/* ==========================================================================
+   2. Design Tokens — Light Mode
+   ========================================================================== */
+[data-bs-theme="light"] {
+    --fh-bg-main: #f8fafc;
+    --fh-bg-surface: #ffffff;
+    --fh-bg-surface-elevated: #f1f5f9;
+    --fh-bg-surface-hover: #e2e8f0;
+    --fh-bg-glass: rgba(255, 255, 255, 0.9);
+
+    --fh-border: rgba(15, 23, 42, 0.1);
+    --fh-border-subtle: rgba(15, 23, 42, 0.05);
+    --fh-border-hover: rgba(79, 70, 229, 0.4);
+
+    --fh-text-primary: #0f172a;
+    --fh-text-secondary: #334155;
+    --fh-text-muted: #64748b;
+    --fh-text-inverse: #ffffff;
+
+    --fh-primary: #4f46e5;
+    --fh-primary-hover: #4338ca;
+    --fh-primary-rgb: 79, 70, 229;
+
+    --fh-accent-cyan: #0891b2;
+    --fh-accent-purple: #9333ea;
+    --fh-accent-pink: #db2777;
+    --fh-accent-amber: #d97706;
+    --fh-accent-emerald: #059669;
+    --fh-accent-crimson: #dc2626;
+
+    --fh-gradient-brand: linear-gradient(135deg, #7e22ce 0%, #4f46e5 50%, #0891b2 100%);
+    --fh-gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 1) 100%);
+    --fh-gradient-glow: radial-gradient(circle at 50% 0%, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+
+    --fh-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --fh-shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
+    --fh-shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.12);
+    --fh-shadow-glow: 0 0 20px rgba(79, 70, 229, 0.2);
+
+    --fh-navbar-bg: rgba(255, 255, 255, 0.9);
+    --fh-footer-bg: #f1f5f9;
+}
+
+/* ==========================================================================
+   3. Global Layout, Base & Typography
+   ========================================================================== */
+:root {
+    --fh-font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --fh-font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --fh-font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+
+    --fh-radius-sm: 8px;
+    --fh-radius-md: 14px;
+    --fh-radius-lg: 20px;
+    --fh-radius-xl: 28px;
+
+    --fh-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --fh-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: var(--fh-font-body);
+    background-color: var(--fh-bg-main);
+    color: var(--fh-text-secondary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    line-height: 1.6;
+    transition: background-color var(--fh-transition-normal), color var(--fh-transition-normal);
+}
+
+/* Subtle Cosmic Ambient Background Layer */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.04) 0%, transparent 60%);
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font {
+    font-family: var(--fh-font-heading);
+    color: var(--fh-text-primary);
+    letter-spacing: -0.025em;
+    font-weight: 700;
+}
+
+a {
+    color: var(--fh-primary);
+    text-decoration: none;
+    transition: color var(--fh-transition-fast);
+}
+
+a:hover {
+    color: var(--fh-primary-hover);
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 1rem;
+    background: var(--fh-primary);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: var(--fh-radius-sm);
+    z-index: 9999;
+    transition: top var(--fh-transition-fast);
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 1rem;
+    color: #fff;
+    outline: 3px solid #fff;
+}
+
+/* Accessible focus ring for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--fh-primary) !important;
+    outline-offset: 3px !important;
+}
+
+/* ==========================================================================
+   4. Navigation Architecture (Netflix Streaming Header)
+   ========================================================================== */
+.fh-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1040;
+    padding: 0.85rem 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, padding 0.35s ease;
+}
+
+.fh-navbar.navbar-scrolled {
+    background-color: #141414 !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
+    padding: 0.55rem 0;
+}
+
+/* Page Spacing & Navbar Clearance */
+.fh-page-main {
+    padding-top: 76px;
+}
+
+.fh-flash-container {
+    position: relative;
+    z-index: 1035;
+    margin-top: 80px;
+}
+
+.fh-flash-container.fh-flash-home {
+    margin-top: 85px;
+    margin-bottom: -70px;
+    position: relative;
+    z-index: 1035;
+}
+
+/* Streaming Flash Alerts */
+.fh-alert-streaming {
+    background: rgba(20, 20, 24, 0.96) !important;
+    border: 1px solid var(--fh-border-hover) !important;
+    border-left: 4px solid var(--fh-accent) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(16px);
+}
+
+.fh-alert-streaming.alert-success {
+    border-left-color: #10b981 !important;
+}
+
+.fh-alert-streaming.alert-info {
+    border-left-color: #06b6d4 !important;
+}
+
+.fh-alert-streaming.alert-danger {
+    border-left-color: var(--fh-accent) !important;
+}
+
+.fh-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* ── Circular Logo Image ── */
+.fh-logo-circle-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(229, 9, 20, 0.7);
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.25),
+                0 0 12px rgba(229, 9, 20, 0.35);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+    display: block;
+    flex-shrink: 0;
+}
+
+.fh-logo:hover .fh-logo-circle-img {
+    transform: scale(1.08);
+    border-color: rgba(249, 115, 22, 0.9);
+    box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.35),
+                0 0 20px rgba(229, 9, 20, 0.55);
+}
+
+.fh-logo img {
+    transition: transform 0.25s ease, filter 0.25s ease;
+    display: block;
+}
+
+.fh-logo:hover img {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 8px rgba(229, 9, 20, 0.5));
+}
+
+/* Legacy icon support (fallback) */
+.fh-logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--fh-accent);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    box-shadow: 0 0 16px rgba(var(--fh-primary-rgb), 0.5);
+    transition: transform var(--fh-transition-normal);
+}
+
+.fh-logo:hover .fh-logo-icon {
+    transform: scale(1.08);
+}
+
+.fh-logo-text {
+    font-family: var(--fh-font-heading);
+    font-size: 1.45rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--fh-accent);
+    text-transform: uppercase;
+}
+
+.fh-logo-text span {
+    color: #ffffff;
+}
+
+
+
+.fh-navbar .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    align-items: center !important;
+    gap: 0.15rem;
+}
+
+.fh-nav-link {
+    color: #e5e5e5 !important;
+    font-weight: 500;
+    font-size: 0.86rem;
+    padding: 0.42rem 0.65rem !important;
+    border-radius: 4px;
+    transition: color 0.2s ease, opacity 0.2s ease, padding 0.25s ease, font-size 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    opacity: 0.85;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.fh-nav-link:hover {
+    color: #ffffff !important;
+    opacity: 1;
+}
+
+.fh-nav-link.active {
+    font-weight: 700;
+    color: #ffffff !important;
+    opacity: 1;
+}
+
+/* Collapsible links when search is active */
+.fh-nav-collapsible {
+    transition: max-width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.28s ease,
+                transform 0.35s ease,
+                margin 0.3s ease;
+    max-width: 140px;
+    opacity: 1;
+    overflow: hidden;
+    white-space: nowrap !important;
+    display: inline-block;
+}
+
+/* When search is active on navbar */
+.fh-navbar.fh-search-active .fh-nav-collapsible {
+    max-width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: scale(0.95);
+}
+
+.fh-navbar.fh-search-active .fh-nav-link {
+    padding: 0.38rem 0.48rem !important;
+}
+
+/* Expandable Netflix-style Search Bar */
+.fh-expandable-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.fh-search-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+/* Search Toggle Button */
+.fh-search-toggle-btn,
+.fh-mobile-search-btn {
+    background: transparent;
+    border: none;
+    color: #e5e5e5;
+    font-size: 1.15rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, background-color 0.25s ease, transform 0.25s ease;
+    z-index: 4;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.fh-search-toggle-btn:hover,
+.fh-mobile-search-btn:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: scale(1.08);
+}
+
+/* Input Animation */
+.fh-expandable-input {
+    width: 0;
+    opacity: 0;
+    padding: 0.42rem 0;
+    font-size: 0.86rem;
+    color: #ffffff;
+    background: rgba(14, 14, 18, 0.95);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    outline: none;
+    transition: width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.25s ease,
+                padding 0.28s ease,
+                border-color 0.3s ease,
+                box-shadow 0.35s ease;
+    pointer-events: none;
+}
+
+/* Open Search Bar: Vibrant Glow & Animation */
+.fh-expandable-search.is-open .fh-expandable-input {
+    width: clamp(210px, 22vw, 320px);
+    opacity: 1;
+    padding: 0.42rem 2.2rem 0.42rem 2.4rem;
+    background: rgba(10, 10, 14, 0.96);
+    border-color: rgba(229, 9, 20, 0.75);
+    box-shadow: 0 0 0 1px rgba(229, 9, 20, 0.4),
+                0 0 20px rgba(229, 9, 20, 0.25),
+                0 6px 24px rgba(0, 0, 0, 0.85);
+    pointer-events: auto;
+}
+
+.fh-expandable-search.is-open .fh-search-toggle-btn {
+    position: absolute;
+    left: 0.15rem;
+    font-size: 0.95rem;
+    color: #ff3344;
+    background: transparent !important;
+    transform: none;
+}
+
+.fh-expandable-search.is-open .fh-search-toggle-btn:hover {
+    color: #ffffff;
+}
+
+/* Clear (X) Button inside Search Bar */
+.fh-search-clear-btn {
+    position: absolute;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 0.2rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 4;
+}
+
+.fh-search-clear-btn:hover {
+    color: #ff3344;
+    transform: scale(1.15);
+}
+
+/* Mobile search overlay */
+.fh-mobile-search-overlay {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(18, 18, 22, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.75rem 1rem;
+    z-index: 1050;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+    animation: fhSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fhSlideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive navbar adjustments for medium screens */
+@media (min-width: 992px) and (max-width: 1250px) {
+    .fh-navbar .navbar-nav {
+        gap: 0;
+    }
+    .fh-nav-link {
+        padding: 0.35rem 0.42rem !important;
+        font-size: 0.8rem;
+    }
+    .fh-logo-text {
+        font-size: 1.15rem;
+    }
+    .fh-navbar-right-controls {
+        gap: 0.4rem !important;
+    }
+    .fh-expandable-search.is-open .fh-expandable-input {
+        width: 185px !important;
+        font-size: 0.8rem;
+    }
+}
+
+.fh-nav-notification-btn {
+    background: transparent;
+    border: none;
+    color: #e5e5e5;
+    font-size: 1.15rem;
+    padding: 0.4rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.fh-nav-notification-btn:hover {
+    color: #ffffff;
+    transform: scale(1.08);
+}
+
+.fh-nav-notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--fh-accent);
+}
+
+/* ==========================================================================
+   User Profile Dropdown / Sidebar Panel
+   ========================================================================== */
+
+/* Make the user dropdown scrollable so all items are always visible */
+#userMenuButton + .dropdown-menu {
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--fh-accent) transparent;
+}
+
+#userMenuButton + .dropdown-menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+#userMenuButton + .dropdown-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#userMenuButton + .dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: var(--fh-accent);
+    border-radius: 4px;
+}
+
+/* Slide-in sidebar panel for the user dropdown on all screen sizes */
+.fh-user-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    right: -320px;
+    bottom: 0 !important;
+    left: auto !important;
+    width: 300px !important;
+    max-height: 100vh !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    border-radius: 0 !important;
+    border-left: 1px solid var(--fh-border) !important;
+    background: #181818 !important;
+    z-index: 1060 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    transform: translateX(0);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: -8px 0 32px rgba(0,0,0,0.7) !important;
+}
+
+.fh-user-sidebar.show {
+    right: 0 !important;
+}
+
+/* Sidebar header with user info */
+.fh-sidebar-header {
+    padding: 1.25rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--fh-border);
+    background: linear-gradient(135deg, rgba(229,9,20,0.15) 0%, rgba(24,24,24,1) 60%);
+    flex-shrink: 0;
+}
+
+.fh-sidebar-header .fh-sidebar-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    border: 2px solid var(--fh-accent);
+    object-fit: cover;
+    box-shadow: 0 0 12px rgba(229,9,20,0.4);
+}
+
+.fh-sidebar-header .fh-sidebar-close {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.fh-sidebar-header .fh-sidebar-close:hover {
+    color: #fff;
+}
+
+/* Sidebar sections */
+.fh-sidebar-section {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--fh-border-subtle);
+    flex-shrink: 0;
+}
+
+.fh-sidebar-section-label {
+    padding: 0.6rem 1.25rem 0.3rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fh-text-muted);
+}
+
+/* Sidebar links */
+.fh-sidebar-link {
+    display: flex !important;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.7rem 1.25rem !important;
+    color: #e5e5e5 !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+    border-radius: 0 !important;
+    white-space: nowrap;
+}
+
+.fh-sidebar-link:hover {
+    background: rgba(255,255,255,0.07) !important;
+    color: #ffffff !important;
+}
+
+.fh-sidebar-link.active {
+    background: rgba(229, 9, 20, 0.12) !important;
+    color: #ffffff !important;
+    border-left: 3px solid var(--fh-accent);
+    padding-left: calc(1.25rem - 3px) !important;
+    font-weight: 600;
+}
+
+.fh-sidebar-link i {
+    font-size: 1.05rem;
+    width: 20px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+/* Sidebar admin section badge */
+.fh-sidebar-admin-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--fh-accent);
+    color: #fff;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Sidebar footer (logout) */
+.fh-sidebar-footer {
+    margin-top: auto;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--fh-border);
+    flex-shrink: 0;
+}
+
+/* Backdrop overlay */
+.fh-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1059;
+    backdrop-filter: blur(2px);
+}
+
+.fh-sidebar-backdrop.active {
+    display: block;
+}
+
+/* ==========================================================================
+   5. Buttons & Interactive Controls
+   ========================================================================== */
+.fh-btn-primary {
+    background: linear-gradient(135deg, var(--fh-primary), var(--fh-accent-purple));
+    border: none;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.925rem;
+    padding: 0.6rem 1.35rem;
+    border-radius: var(--fh-radius-md);
+    box-shadow: 0 4px 14px rgba(var(--fh-primary-rgb), 0.35);
+    transition: all var(--fh-transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.fh-btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(var(--fh-primary-rgb), 0.55);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.fh-btn-primary:active {
+    transform: translateY(0);
+}
+
+.fh-btn-secondary {
+    background: var(--fh-bg-surface-elevated);
+    border: 1px solid var(--fh-border);
+    color: var(--fh-text-primary) !important;
+    font-weight: 600;
+    font-size: 0.925rem;
+    padding: 0.6rem 1.35rem;
+    border-radius: var(--fh-radius-md);
+    transition: all var(--fh-transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.fh-btn-secondary:hover {
+    background: var(--fh-bg-surface-hover);
+    border-color: var(--fh-border-hover);
+    transform: translateY(-2px);
+    color: var(--fh-text-primary);
+}
+
+.fh-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--fh-border);
+    color: var(--fh-text-secondary) !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--fh-radius-sm);
+    transition: all var(--fh-transition-fast);
+}
+
+.fh-btn-ghost:hover {
+    background: var(--fh-border);
+    color: var(--fh-text-primary) !important;
+}
+
+/* Theme Toggle Button — Icon Only (Navbar & Mobile Header) */
+.fh-theme-toggle {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: var(--fh-radius-sm);
+    border: 1px solid var(--fh-border);
+    background: var(--fh-bg-surface);
+    color: var(--fh-text-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--fh-transition-fast);
+    position: relative;
+    user-select: none;
+    line-height: 1;
+}
+
+.fh-theme-toggle i {
+    font-size: 1rem;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+    display: inline-block;
+}
+
+.fh-theme-toggle:hover {
+    background: var(--fh-border);
+    color: var(--fh-text-primary);
+    transform: scale(1.08);
+    box-shadow: 0 0 14px rgba(229, 9, 20, 0.35);
+}
+
+.fh-theme-toggle:active i {
+    transform: rotate(180deg) scale(0.9);
+}
+
+/* Labeled Theme Toggle Pill (Footer) */
+.fh-theme-toggle.fh-theme-toggle-pill {
+    width: auto !important;
+    min-width: fit-content;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0.3rem 0.95rem !important;
+    border-radius: 9999px !important;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #e5e5e5 !important;
+    font-size: 0.8rem;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+.fh-theme-toggle.fh-theme-toggle-pill:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(229, 9, 20, 0.5) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(229, 9, 20, 0.2);
+}
+
+/* Sidebar Theme Toggle Button */
+.fh-theme-toggle.fh-sidebar-theme-btn {
+    width: 100% !important;
+    height: auto !important;
+    min-width: unset;
+    min-height: unset;
+    border-radius: 8px !important;
+    border: none !important;
+    background: transparent !important;
+    color: var(--fh-text-secondary) !important;
+    justify-content: space-between;
+}
+
+.fh-theme-toggle.fh-sidebar-theme-btn:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: #ffffff !important;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Theme Icon Animation Triggered on Switch */
+.fh-theme-spin {
+    animation: fhThemeSpin 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes fhThemeSpin {
+    0% {
+        transform: rotate(-120deg) scale(0.6);
+        opacity: 0.4;
+    }
+    60% {
+        transform: rotate(30deg) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   6. Universal Card System
+   ========================================================================== */
+.fh-card {
+    background-color: var(--fh-bg-surface);
+    background-image: var(--fh-gradient-card);
+    border: 1px solid var(--fh-border);
+    border-radius: var(--fh-radius-lg);
+    box-shadow: var(--fh-shadow-sm);
+    transition: all var(--fh-transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.fh-card-interactive {
+    cursor: pointer;
+}
+
+.fh-card-interactive:hover {
+    border-color: var(--fh-border-hover);
+    box-shadow: var(--fh-shadow-md);
+    transform: translateY(-3px);
+}
+
+.fh-card-glow::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--fh-gradient-brand);
+}
+
+/* Category Card */
+.fh-category-card {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--fh-radius-lg);
+    border: 1px solid var(--fh-border);
+    background: var(--fh-bg-surface);
+    transition: all var(--fh-transition-normal);
+    text-decoration: none;
+}
+
+.fh-category-card:hover {
+    border-color: var(--fh-primary);
+    box-shadow: var(--fh-shadow-glow);
+    transform: translateY(-4px);
+}
+
+.fh-category-icon-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--fh-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all var(--fh-transition-normal);
+    margin-bottom: 0.75rem;
+}
+
+.fh-category-card:hover .fh-category-icon-box {
+    background: linear-gradient(135deg, var(--fh-primary) 0%, #b91c1c 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(var(--fh-primary-rgb), 0.6);
+    transform: scale(1.1) rotate(-3deg);
+}
+
+/* Content & Character Cards */
+.fh-thumb-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    border-radius: calc(var(--fh-radius-lg) - 2px) calc(var(--fh-radius-lg) - 2px) 0 0;
+    overflow: hidden;
+    background: var(--fh-bg-surface-elevated);
+}
+
+.fh-thumb-wrap img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform var(--fh-transition-normal);
+}
+
+.fh-card-interactive:hover .fh-thumb-wrap img {
+    transform: scale(1.05);
+}
+
+.fh-thumb-placeholder {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--fh-bg-surface-elevated), var(--fh-bg-surface));
+    color: var(--fh-text-muted);
+    font-size: 2.5rem;
+}
+
+/* Badges & Pills */
+.fh-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.35rem 0.7rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.fh-badge-primary {
+    background: rgba(var(--fh-primary-rgb), 0.15);
+    color: var(--fh-primary);
+    border: 1px solid rgba(var(--fh-primary-rgb), 0.3);
+}
+
+.fh-badge-cyan {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--fh-accent-cyan);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.fh-badge-purple {
+    background: rgba(168, 85, 247, 0.15);
+    color: var(--fh-accent-purple);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.fh-badge-admin {
+    background: linear-gradient(135deg, var(--fh-accent-pink), var(--fh-accent-purple));
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+}
+
+.fh-badge-user {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--fh-accent-cyan);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   7. Form Controls & Inputs
+   ========================================================================== */
+.form-control,
+.form-select {
+    background-color: var(--fh-bg-surface);
+    border: 1px solid var(--fh-border);
+    color: var(--fh-text-primary);
+    border-radius: var(--fh-radius-md);
+    padding: 0.7rem 1rem;
+    transition: all var(--fh-transition-fast);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--fh-bg-surface);
+    border-color: var(--fh-primary);
+    box-shadow: 0 0 0 4px rgba(var(--fh-primary-rgb), 0.2);
+    color: var(--fh-text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--fh-text-muted);
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--fh-text-primary);
+    margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
+   8. Breadcrumbs & Semantic Navigation
+   ========================================================================== */
+.fh-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.5rem;
+    list-style: none;
+    background: var(--fh-bg-surface);
+    border: 1px solid var(--fh-border);
+    border-radius: var(--fh-radius-md);
+    font-size: 0.85rem;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.fh-breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fh-text-muted);
+}
+
+.fh-breadcrumb-item + .fh-breadcrumb-item::before {
+    content: '/';
+    margin-right: 0.5rem;
+    color: var(--fh-text-muted);
+    opacity: 0.5;
+}
+
+.fh-breadcrumb-item a {
+    color: var(--fh-text-secondary);
+    text-decoration: none;
+    transition: color var(--fh-transition-fast);
+}
+
+.fh-breadcrumb-item a:hover {
+    color: var(--fh-primary);
+}
+
+.fh-breadcrumb-item.active {
+    color: var(--fh-text-primary);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   9. Loading States & Shimmer Skeletons
+   ========================================================================== */
+@keyframes fh-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.fh-skeleton {
+    background: linear-gradient(90deg, 
+        var(--fh-bg-surface-elevated) 25%, 
+        var(--fh-bg-surface-hover) 50%, 
+        var(--fh-bg-surface-elevated) 75%);
+    background-size: 200% 100%;
+    animation: fh-shimmer 1.8s infinite;
+    border-radius: var(--fh-radius-sm);
+}
+
+.fh-skeleton-text {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.fh-skeleton-title {
+    height: 1.5rem;
+    width: 60%;
+    margin-bottom: 0.75rem;
+}
+
+.fh-skeleton-card {
+    border-radius: var(--fh-radius-lg);
+    height: 240px;
+}
+
+/* ==========================================================================
+   10. Empty States
+   ========================================================================== */
+.fh-empty-state {
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+    border: 1px dashed var(--fh-border);
+    border-radius: var(--fh-radius-lg);
+    background: var(--fh-bg-surface);
+}
+
+.fh-empty-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--fh-bg-surface-elevated);
+    border: 1px solid var(--fh-border);
+    color: var(--fh-text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   11. Footer & Sitemap
+   ========================================================================== */
+.fh-footer {
+    margin-top: auto;
+    background: var(--fh-footer-bg);
+    border-top: 1px solid var(--fh-border);
+    padding: 4rem 0 2rem;
+    color: var(--fh-text-muted);
+    font-size: 0.9rem;
+}
+
+.fh-footer-heading {
+    font-family: var(--fh-font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--fh-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.2rem;
+}
+
+.fh-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fh-footer-links li {
+    margin-bottom: 0.6rem;
+}
+
+.fh-footer-links a {
+    color: var(--fh-text-muted);
+    transition: all var(--fh-transition-fast);
+}
+
+.fh-footer-links a:hover {
+    color: var(--fh-text-primary);
+    padding-left: 4px;
+}
+
+/* Visual Sitemap Container */
+.fh-sitemap-section {
+    padding: 3rem 0;
+    border-top: 1px solid var(--fh-border-subtle);
+    background: var(--fh-bg-surface);
+}
+
+/* ==========================================================================
+   12. Utilities & Micro-Animations
+   ========================================================================== */
+.text-gradient {
+    background: var(--fh-gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-surface {
+    background-color: var(--fh-bg-surface) !important;
+}
+
+.border-subtle {
+    border-color: var(--fh-border) !important;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .fh-card-interactive:hover,
+    .fh-category-card:hover,
+    .fh-btn-primary:hover,
+    .fh-btn-secondary:hover {
+        transform: none !important;
+    }
+}
+
+/* ==========================================================================
+   13. Compatibility Aliases for Phase 03 Views
+   ========================================================================== */
+.btn-primary-gradient {
+    background: linear-gradient(135deg, var(--fh-primary), var(--fh-accent-purple)) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(var(--fh-primary-rgb), 0.35);
+    transition: all var(--fh-transition-normal);
+}
+
+.btn-primary-gradient:hover {
+    box-shadow: 0 6px 20px rgba(var(--fh-primary-rgb), 0.55);
+    transform: translateY(-2px);
+    color: #ffffff !important;
+}
+
+.btn-outline-custom {
+    background: var(--fh-bg-surface-elevated) !important;
+    border: 1px solid var(--fh-border) !important;
+    color: var(--fh-text-primary) !important;
+    transition: all var(--fh-transition-fast);
+}
+
+.btn-outline-custom:hover {
+    background: var(--fh-bg-surface-hover) !important;
+    border-color: var(--fh-border-hover) !important;
+    color: var(--fh-text-primary) !important;
+}
+
+.badge-role-admin {
+    background: linear-gradient(135deg, var(--fh-accent-pink), var(--fh-accent-purple)) !important;
+    color: #ffffff !important;
+}
+
+.badge-role-user {
+    background: rgba(6, 182, 212, 0.15) !important;
+    color: var(--fh-accent-cyan) !important;
+    border: 1px solid rgba(6, 182, 212, 0.3) !important;
+}
+
+.fandom-badge {
+    background: var(--fh-bg-surface-elevated);
+    border: 1px solid var(--fh-border);
+    color: var(--fh-text-secondary);
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* ==========================================================================
+   14. Netflix-Style Streaming / OTT UI Components & Micro-Animations
+   ========================================================================== */
+
+/* Hero Banner with Cinematic Ken Burns & Text Reveal */
+.netflix-hero {
+    position: relative;
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    background-color: #141414;
+    overflow: hidden;
+    margin-top: -68px; /* Pull under fixed transparent navbar */
+    padding-top: 68px;
+}
+
+.netflix-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+.netflix-hero-bg.active {
+    opacity: 1;
+    animation: kenBurnsZoom 20s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+}
+
+.netflix-hero-bg.inactive {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes kenBurnsZoom {
+    0% { transform: scale(1) translate3d(0, 0, 0); }
+    100% { transform: scale(1.03) translate3d(-0.5%, -0.5%, 0); }
+}
+
+/* Dual Vignette Overlay for Ultra Contrast */
+.netflix-hero-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, #141414 0%, rgba(20, 20, 20, 0.92) 35%, rgba(20, 20, 20, 0.45) 65%, transparent 100%),
+        linear-gradient(180deg, rgba(20, 20, 20, 0.2) 0%, transparent 40%, rgba(20, 20, 20, 0.85) 75%, #141414 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.netflix-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 680px;
+    padding-left: clamp(1.5rem, 5vw, 4.5rem);
+    padding-right: 1.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.netflix-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fh-accent);
+    margin-bottom: 0.75rem;
+}
+
+.netflix-hero-title {
+    font-family: var(--fh-font-heading);
+    font-size: clamp(2.3rem, 5.2vw, 4rem);
+    font-weight: 900;
+    line-height: 1.08;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    letter-spacing: -0.02em;
+}
+
+.netflix-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+    font-size: 0.875rem;
+}
+
+.netflix-match-badge {
+    color: #46d369;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.netflix-badge-pill {
+    padding: 0.18rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #e5e5e5;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.netflix-hero-synopsis {
+    font-size: clamp(0.95rem, 1.2vw, 1.18rem);
+    line-height: 1.55;
+    color: #e5e5e5;
+    margin-bottom: 1.8rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.netflix-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.netflix-btn-play {
+    background: #ffffff;
+    color: #000000 !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0.7rem 1.9rem;
+    border-radius: 4px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.netflix-btn-play:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: scale(1.06);
+    color: #000000 !important;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
+}
+
+.netflix-btn-info {
+    background: rgba(109, 109, 110, 0.65);
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.7rem 1.9rem;
+    border-radius: 4px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.netflix-btn-info:hover {
+    background: rgba(109, 109, 110, 0.45);
+    transform: scale(1.06);
+    color: #ffffff !important;
+}
+
+/* Sound Wave Equalizer Micro-Badge on Hero Banner */
+.netflix-hero-sound-badge {
+    position: absolute;
+    bottom: 2.2rem;
+    left: clamp(1.5rem, 5vw, 4.5rem);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.8rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.netflix-hero-sound-badge:hover {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: var(--fh-accent);
+    transform: scale(1.05);
+}
+
+.netflix-sound-waves {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+}
+
+.netflix-sound-wave-bar {
+    width: 2.5px;
+    background-color: var(--fh-accent);
+    border-radius: 2px;
+    animation: soundWave 1.2s ease-in-out infinite alternate;
+}
+
+.netflix-sound-wave-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.netflix-sound-wave-bar:nth-child(2) { height: 14px; animation-delay: 0.3s; }
+.netflix-sound-wave-bar:nth-child(3) { height: 9px; animation-delay: 0.2s; }
+.netflix-sound-wave-bar:nth-child(4) { height: 12px; animation-delay: 0.4s; }
+
+@keyframes soundWave {
+    0% { height: 3px; }
+    100% { height: 14px; }
+}
+
+/* Hero Carousel Slide Indicators with Auto-Fill Animation */
+.netflix-hero-indicators {
+    position: absolute;
+    bottom: 2.2rem;
+    right: clamp(1.5rem, 5vw, 4.5rem);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.netflix-hero-dot {
+    width: 28px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.netflix-hero-dot.active {
+    background: var(--fh-accent);
+    width: 44px;
+    box-shadow: 0 0 10px rgba(var(--fh-primary-rgb), 0.7);
+}
+
+/* Horizontal Content Rows */
+.netflix-row {
+    position: relative;
+    padding: 1.4rem 0 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.netflix-row-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+    margin-bottom: 0.85rem;
+}
+
+.netflix-row-title {
+    font-family: var(--fh-font-heading);
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    font-weight: 700;
+    color: #e5e5e5;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+}
+
+.netflix-row:hover .netflix-row-title {
+    color: #ffffff;
+}
+
+.netflix-row-explore {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #8c8c8c;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.netflix-row-explore:hover {
+    color: var(--fh-accent);
+    transform: translateX(4px);
+}
+
+/* Slider Container and Navigation Arrows */
+.netflix-slider-container {
+    position: relative;
+    width: 100%;
+    padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.netflix-slider-track {
+    display: flex;
+    gap: 0.85rem;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 1.6rem 0.6rem 2.4rem 0.6rem;
+    margin: -1.6rem -0.6rem -2.4rem -0.6rem;
+}
+
+.netflix-slider-track::-webkit-scrollbar {
+    display: none;
+}
+
+.netflix-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: calc(100% - 2rem);
+    background: rgba(20, 20, 20, 0.75);
+    color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 25;
+    opacity: 0;
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease, background-color 0.25s ease, transform 0.25s ease;
+    border-radius: 4px;
+}
+
+.netflix-slider-container:hover .netflix-slider-arrow {
+    opacity: 1;
+}
+
+.netflix-slider-arrow:hover {
+    background: rgba(20, 20, 20, 0.95);
+    color: var(--fh-accent);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.netflix-slider-arrow.arrow-left { left: 0.5rem; }
+.netflix-slider-arrow.arrow-right { right: 0.5rem; }
+
+/* Ultra-Realistic Netflix Streaming Card & Spring Physics */
+.netflix-card {
+    flex: 0 0 clamp(220px, 19vw, 300px);
+    position: relative;
+    border-radius: 6px;
+    background-color: #181818;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, z-index 0s 0.35s;
+    z-index: 1;
+    transform-origin: center center;
+}
+
+.netflix-card:first-child { transform-origin: left center; }
+.netflix-card:last-child { transform-origin: right center; }
+
+.netflix-card-thumb-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 ratio */
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #232323;
+    transition: border-radius 0.2s ease;
+}
+
+.netflix-card-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Simulated Video Trailer Shine Sweep on Hover */
+.netflix-card-teaser-fx {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.netflix-card:hover .netflix-card-teaser-fx {
+    opacity: 1;
+}
+
+.netflix-card-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--fh-accent);
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 0.18rem 0.48rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.netflix-card-top10 {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+}
+
+/* Continue Watching Progress Bar Overlay */
+.netflix-card-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    z-index: 3;
+}
+
+.netflix-card-progress-bar {
+    height: 100%;
+    background-color: var(--fh-accent);
+    border-radius: 0 2px 2px 0;
+}
+
+/* Netflix Card Hover Zoom & Info Panel */
+.netflix-card-hover-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #181818;
+    border-radius: 0 0 6px 6px;
+    padding: 0.95rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease 0.12s, transform 0.25s ease 0.12s, visibility 0.25s;
+    pointer-events: none;
+    z-index: 55;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.netflix-card:hover {
+    transform: scale(1.32) translateY(-14px);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.9), 0 0 24px rgba(229, 9, 20, 0.25);
+    z-index: 50;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, z-index 0s;
+}
+
+.netflix-card:hover .netflix-card-thumb-wrap {
+    border-radius: 6px 6px 0 0;
+}
+
+.netflix-card:hover .netflix-card-thumb {
+    transform: scale(1.05);
+}
+
+.netflix-card:hover .netflix-card-hover-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Action Button Micro-Animations */
+.netflix-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+}
+
+.netflix-circle-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(42, 42, 42, 0.75);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-decoration: none;
+}
+
+.netflix-circle-btn:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.15);
+    color: #ffffff;
+}
+
+.netflix-circle-btn.play-btn {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+.netflix-circle-btn.play-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000000;
+}
+
+.netflix-circle-btn.more-btn {
+    margin-left: auto;
+}
+
+.netflix-circle-btn.bookmarked {
+    background: var(--fh-accent);
+    border-color: var(--fh-accent);
+    color: #ffffff;
+}
+
+.netflix-card-hover-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.netflix-card-hover-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.45rem;
+}
+
+.netflix-card-hover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    color: #a3a3a3;
+}
+
+.netflix-tag-dot {
+    font-size: 0.35rem;
+    color: #666666;
+}
+
+/* Netflix Quick Detail Modal Dialog */
+.netflix-modal-dialog {
+    max-width: 880px;
+    margin: 2.5rem auto;
+}
+
+.netflix-modal-content {
+    background-color: #181818;
+    color: #e5e5e5;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95);
+    animation: modalScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.netflix-modal-hero {
+    position: relative;
+    width: 100%;
+    padding-top: 48%;
+    background-size: cover;
+    background-position: center;
+    background-color: #101010;
+}
+
+.netflix-modal-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(24, 24, 24, 0.1) 0%, rgba(24, 24, 24, 0.65) 60%, #181818 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem;
+}
+
+.netflix-modal-close-btn {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(24, 24, 24, 0.85);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(6px);
+    transition: background-color 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.netflix-modal-close-btn:hover {
+    background: #2a2a2a;
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Toast Floating Notification */
+.fanhub-toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    pointer-events: none;
+}
+
+.fanhub-toast {
+    background: rgba(24, 24, 24, 0.95);
+    border: 1px solid var(--fh-accent);
+    color: #ffffff;
+    padding: 0.8rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    pointer-events: auto;
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Intersection Observer Scroll Reveal */
+.netflix-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.netflix-reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Skeleton Shimmer Loading Placeholder */
+.netflix-skeleton {
+    background: linear-gradient(90deg, #1f1f1f 25%, #2a2a2a 50%, #1f1f1f 75%);
+    background-size: 200% 100%;
+    animation: netflixShimmer 1.5s infinite;
+    border-radius: 6px;
+}
+
+@keyframes netflixShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAN HUB PLUS — UNIQUE CYBER ANIMATED PAGINATION COMPONENT
+   ═══════════════════════════════════════════════════════════════ */
+.fh-pagination-container {
+    position: relative;
+    padding: 1.25rem 0;
+    user-select: none;
+}
+
+.fh-pagination-meta {
+    font-size: 0.8125rem;
+    color: #94a3b8;
+    letter-spacing: 0.02em;
+}
+
+.fh-meta-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e50914;
+    display: inline-block;
+    box-shadow: 0 0 10px #e50914;
+    animation: fhDotBreathe 2s ease-in-out infinite;
+}
+
+@keyframes fhDotBreathe {
+    0%, 100% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 6px #e50914; }
+    50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 14px #e50914; }
+}
+
+.fh-meta-divider {
+    opacity: 0.4;
+}
+
+.fh-pagination-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(22, 27, 44, 0.88), rgba(12, 15, 26, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    padding: 6px 10px;
+    box-shadow: 0 14px 34px -8px rgba(0, 0, 0, 0.65), 0 0 25px -5px rgba(229, 9, 20, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 100%;
+}
+
+.fh-pagination-nav:hover {
+    border-color: rgba(229, 9, 20, 0.3);
+    box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.75), 0 0 35px -5px rgba(229, 9, 20, 0.25);
+}
+
+.fh-pagination-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fh-page-item {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.fh-page-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    font-family: inherit;
+    border: none;
+    outline: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.fh-pagination-container svg {
+    width: 14px !important;
+    height: 14px !important;
+    max-width: 14px !important;
+    max-height: 14px !important;
+    display: inline-block !important;
+}
+
+.fh-arrow-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fh-nav-btn {
+    padding: 8px 14px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #e2e8f0;
+    font-size: 0.825rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    gap: 6px;
+}
+
+.fh-nav-btn:hover:not(.disabled) {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.22), rgba(229, 9, 20, 0.08));
+    border-color: rgba(229, 9, 20, 0.55);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(229, 9, 20, 0.3);
+    transform: translateY(-1px);
+}
+
+.fh-nav-prev:hover:not(.disabled) .fh-arrow-icon {
+    transform: translateX(-3px);
+}
+
+.fh-nav-next:hover:not(.disabled) .fh-arrow-icon {
+    transform: translateX(3px);
+}
+
+.fh-nav-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.02);
+    border-color: transparent;
+    color: #64748b;
+}
+
+.fh-page-number {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #94a3b8;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.fh-page-number:hover:not(.active) {
+    background: rgba(229, 9, 20, 0.15);
+    border-color: rgba(229, 9, 20, 0.45);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.fh-page-number.active {
+    background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-weight: 800;
+    box-shadow: 0 0 16px rgba(229, 9, 20, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    cursor: default;
+    animation: fhActivePulse 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fhActivePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 14px rgba(229, 9, 20, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 24px rgba(229, 9, 20, 0.95), 0 0 6px rgba(255, 255, 255, 0.6);
+    }
+}
+
+.fh-jump-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #64748b;
+    font-size: 0.75rem;
+}
+
+.fh-jump-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.fh-page-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 6px;
+    height: 38px;
+}
+
+.fh-page-dots .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #64748b;
+    opacity: 0.6;
+}
+
+@media (max-width: 576px) {
+    .fh-pagination-nav {
+        padding: 4px 8px;
+        gap: 4px;
+    }
+    .fh-page-number {
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
+    }
+    .fh-nav-btn {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+    }
+    .fh-jump-btn {
+        display: none;
+    }
+}
+
