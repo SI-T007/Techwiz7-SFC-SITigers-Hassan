@@ -1,6 +1,6 @@
 <footer class="fh-footer py-5" style="background-color: #101010; border-top: 1px solid rgba(255, 255, 255, 0.08);">
     <div class="container py-3">
-        <!-- Questions / Contact prompt -->
+       
         <div class="mb-4">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <a class="fh-logo mb-2" href="{{ route('home') }}" aria-label="Fan Hub Plus">
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <!-- 4-Column Grouped Links -->
+   
         <div class="row g-4 mb-4 small text-muted">
             <div class="col-6 col-md-3">
                 <ul class="list-unstyled d-flex flex-column gap-2 mb-0">

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Header -->
+   
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <!-- Quick Metrics -->
+    
     <div class="row g-3 mb-4">
         <div class="col-4 col-md-4">
             <div class="fh-card p-3">

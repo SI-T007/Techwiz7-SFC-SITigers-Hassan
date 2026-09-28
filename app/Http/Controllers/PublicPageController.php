@@ -17,9 +17,7 @@ use Illuminate\View\View;
 
 class PublicPageController extends Controller
 {
-    /**
-     * Homepage Portal (Netflix OTT Streaming Experience)
-     */
+    
     public function home(): View
     {
         $categories = Category::active()->withCount('contents')->get();

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-4" style="max-width: 900px;">
-    <!-- Header -->
+   
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -18,12 +18,11 @@
         </a>
     </div>
 
-    <!-- Form Card -->
     <div class="fh-card p-4">
         <form method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
             @csrf
 
-            <!-- Fandom Category & Status -->
+            
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
                     <label for="category_id" class="form-label text-light small fw-bold">Fandom Universe <span class="text-danger">*</span></label>

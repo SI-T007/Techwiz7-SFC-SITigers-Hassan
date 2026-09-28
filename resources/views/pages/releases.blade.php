@@ -15,10 +15,10 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+    
     <x-breadcrumb :items="$breadcrumbs" />
 
-    <!-- Page Header -->
+    
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">

@@ -4,10 +4,10 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+    
     <x-breadcrumb :items="$breadcrumbs" />
 
-    <!-- Hero Header Banner -->
+   
     <div class="position-relative rounded-4 overflow-hidden mb-4" style="min-height: 340px; background: rgba(0,0,0,0.6);">
         <img src="{{ $release->cover_image_url }}" 
              alt="{{ $release->title }}" 

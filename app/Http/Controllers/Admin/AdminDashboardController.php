@@ -17,9 +17,7 @@ use Illuminate\View\View;
 
 class AdminDashboardController extends Controller
 {
-    /**
-     * Show Admin Dashboard with Graphical Telemetry.
-     */
+    
     public function index(): View
     {
         $metrics = [

@@ -15,10 +15,10 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
-    <!-- Fandom Hero Banner -->
+    
     <div class="fh-card fh-card-glow p-4 p-md-5 mb-4 position-relative overflow-hidden">
         <div class="row align-items-center g-4 position-relative" style="z-index: 2;">
             <div class="col-auto">

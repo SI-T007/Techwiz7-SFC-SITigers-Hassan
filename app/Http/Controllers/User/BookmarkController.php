@@ -15,9 +15,7 @@ use Illuminate\View\View;
 
 class BookmarkController extends Controller
 {
-    /**
-     * Whitelist of bookmarkable types.
-     */
+
     protected array $morphMap = [
         'content' => Content::class,
         'character' => Character::class,

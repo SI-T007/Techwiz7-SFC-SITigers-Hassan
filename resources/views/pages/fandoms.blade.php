@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+    
     <x-breadcrumb :items="$breadcrumbs" />
 
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">

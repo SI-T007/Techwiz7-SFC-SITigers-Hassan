@@ -3,7 +3,7 @@
 ])
 
 <div class="fh-card fh-card-interactive h-100 d-flex flex-column overflow-hidden position-relative transition-all">
-    <!-- Thumbnail & Play Header -->
+    
     <a href="{{ route('multimedia.show', $media->id) }}" class="text-decoration-none position-relative d-block overflow-hidden" style="height: 190px; background: #0a0a0c;">
         <img src="{{ $media->thumbnail_url }}" 
              alt="{{ $media->title }}" 
@@ -11,7 +11,7 @@
              loading="lazy"
              onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
 
-        <!-- Top Badges -->
+       
         <div class="position-absolute top-0 start-0 p-2 d-flex flex-wrap gap-1 z-2">
             <span class="fh-badge fh-badge-primary">
                 {{ $media->media_type_label }}

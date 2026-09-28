@@ -4,10 +4,9 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
-    <!-- Page Header -->
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
         <div>
             <span class="small text-info fw-bold text-uppercase" style="letter-spacing: 0.08em;">Discovery Hub</span>
@@ -19,10 +18,10 @@
         </span>
     </div>
 
-    <!-- Filter & Search Toolbar -->
+   
     <div class="fh-card p-3 p-md-4 mb-4">
         <form method="GET" action="{{ route('explore') }}" class="row g-2 align-items-center">
-            <!-- Search Keyword -->
+           
             <div class="col-lg-4 col-md-6">
                 <div class="input-group">
                     <span class="input-group-text bg-transparent border-subtle text-muted">

@@ -4,10 +4,9 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
-    <!-- Page Header -->
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
         <div>
             <span class="small text-warning fw-bold text-uppercase" style="letter-spacing: 0.08em;">Personal Collection</span>
@@ -19,10 +18,10 @@
         </span>
     </div>
 
-    <!-- Filter Tabs & Search -->
+   
     <div class="fh-card p-3 mb-4">
         <div class="row g-2 align-items-center justify-content-between">
-            <!-- Type Tabs -->
+          
             <div class="col-md-8 d-flex flex-wrap gap-2">
                 <a href="{{ route('bookmarks.index') }}" 
                    class="btn btn-sm {{ !request('type') ? 'fh-btn-primary' : 'fh-btn-ghost' }}">

@@ -11,7 +11,7 @@
         </div>
 
         <div class="row g-4">
-            <!-- Platform & Discovery -->
+            
             <div class="col-6 col-md-4 col-lg-2">
                 <h3 class="fh-footer-heading" style="font-size: 0.85rem;">Platform</h3>
                 <ul class="fh-footer-links small">
@@ -22,7 +22,7 @@
                 </ul>
             </div>
 
-            <!-- Fandom Realms -->
+        
             <div class="col-6 col-md-4 col-lg-3">
                 <h3 class="fh-footer-heading" style="font-size: 0.85rem;">Fandom Realms</h3>
                 <ul class="fh-footer-links small">

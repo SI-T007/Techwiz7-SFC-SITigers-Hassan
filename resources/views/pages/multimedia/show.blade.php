@@ -4,14 +4,14 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
     <div class="row g-4 justify-content-center">
-        <!-- Main Video Theater & Player Column -->
+   
         <div class="col-lg-8">
             <article class="fh-card fh-card-glow p-4 p-md-5 mb-4">
-                <!-- Metadata Badges Header -->
+               
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
                     <div class="d-flex flex-wrap align-items-center gap-2">
                         <span class="fh-badge fh-badge-primary">

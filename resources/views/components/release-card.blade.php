@@ -3,7 +3,7 @@
 ])
 
 <div class="fh-card fh-card-interactive h-100 d-flex flex-column overflow-hidden transition-all">
-    <!-- Image Header -->
+    
     <div class="position-relative" style="height: 180px; background: #0a0a0c; overflow: hidden;">
         <img src="{{ $release->cover_image_url }}" 
              alt="{{ $release->title }}" 
@@ -12,7 +12,6 @@
              onerror="window.handleImageFallback ? window.handleImageFallback(this) : null">
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(10,10,12,0.2) 0%, rgba(10,10,12,0.9) 100%);"></div>
 
-        <!-- Top Badges -->
         <div class="position-absolute top-0 start-0 p-3 d-flex flex-wrap gap-1">
             <span class="fh-badge fh-badge-primary">
                 {{ strtoupper($release->type) }}

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Header -->
+    
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <!-- Filters & Search Toolbar -->
+   
     <div class="fh-card p-3 mb-4">
         <form method="GET" action="{{ route('admin.content.index') }}" class="row g-2 align-items-center">
             <div class="col-md-5">

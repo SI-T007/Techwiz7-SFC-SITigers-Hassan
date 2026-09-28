@@ -15,11 +15,11 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
     <div class="row g-4">
-        <!-- Main Character Dossier -->
+    
         <div class="col-lg-7">
             <div class="fh-card fh-card-glow p-4 p-md-5 h-100">
                 <div class="d-flex flex-wrap align-items-center gap-2 mb-3">

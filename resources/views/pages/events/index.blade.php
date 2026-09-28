@@ -3,10 +3,10 @@
 @section('title', 'Multiverse Events Map, Calendar & Nearby Conventions — Fan Hub Plus')
 
 @push('styles')
-<!-- Leaflet CSS for Dark Interactive Map -->
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-    /* Animated Radar Sweep Effect */
+   
     @keyframes radarSweep {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }

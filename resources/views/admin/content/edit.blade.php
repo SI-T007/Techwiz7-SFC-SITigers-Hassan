@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Header -->
+    
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -27,7 +27,7 @@
                     @csrf
                     @method('PUT')
 
-                    <!-- Title -->
+                   
                     <div class="mb-4">
                         <label for="title" class="form-label text-light fw-semibold">Content Title <span class="text-danger">*</span></label>
                         <input type="text" 

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
@@ -18,7 +18,7 @@
         </span>
     </div>
 
-    <!-- Filter Toolbar -->
+    
     <div class="fh-card p-3 mb-4">
         <form method="GET" action="{{ route('characters.index') }}" class="row g-2 align-items-center">
             <div class="col-md-6">

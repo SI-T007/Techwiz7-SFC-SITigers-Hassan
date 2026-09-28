@@ -1,17 +1,16 @@
 <nav class="navbar navbar-expand-lg fh-navbar">
     <div class="container-fluid px-3 px-md-4 position-relative">
-        <!-- Brand Logo -->
+        
         <a class="fh-logo me-3 me-xl-4" href="{{ route('home') }}" aria-label="Fan Hub Plus Home">
-            <!-- Circular Icon (all breakpoints) -->
+            
             <img src="{{ asset('images/logo-favicon.png') }}?v=2"
                  alt="Fan Hub Plus"
                  class="fh-logo-circle-img"
                  loading="eager">
-            <!-- Wordmark text — desktop only -->
+           
             <span class="fh-logo-text d-none d-md-inline">FAN HUB<span>+</span></span>
         </a>
 
-        <!-- Mobile Search Dropdown Overlay -->
         <div class="fh-mobile-search-overlay d-lg-none" id="mobileSearchOverlay" style="display: none;">
             <form action="{{ route('explore') }}" method="GET" class="d-flex align-items-center gap-2 w-100">
                 <div class="input-group flex-grow-1">

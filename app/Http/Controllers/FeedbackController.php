@@ -12,9 +12,7 @@ use Illuminate\View\View;
 
 class FeedbackController extends Controller
 {
-    /**
-     * Show the platform feedback form.
-     */
+    
     public function create(Request $request): View
     {
         $breadcrumbs = [

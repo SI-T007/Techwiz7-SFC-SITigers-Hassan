@@ -17,9 +17,7 @@ use Illuminate\View\View;
 
 class AdminArticleController extends Controller
 {
-    /**
-     * Display a listing of articles.
-     */
+    
     public function index(Request $request): View
     {
         $query = Content::where('type', 'article')->with(['category', 'user']);

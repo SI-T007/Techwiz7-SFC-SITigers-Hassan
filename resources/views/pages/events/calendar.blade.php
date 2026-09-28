@@ -4,10 +4,9 @@
 
 @section('content')
 <div class="container py-4">
-    <!-- Breadcrumbs -->
+   
     <x-breadcrumb :items="$breadcrumbs" />
 
-    <!-- Calendar Header & Navigation Controls -->
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
             <span class="small text-info fw-bold text-uppercase" style="letter-spacing: 0.08em;">Interactive Calendar</span>

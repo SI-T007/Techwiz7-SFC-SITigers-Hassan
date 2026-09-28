@@ -17,9 +17,7 @@ use Illuminate\View\View;
 
 class AdminContentController extends Controller
 {
-    /**
-     * Display a listing of all content items.
-     */
+    
     public function index(Request $request): View
     {
         $query = Content::with(['category', 'author', 'genres'])->latest();
